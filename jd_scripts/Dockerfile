@@ -24,7 +24,7 @@ RUN mkdir /jds \
         && git remote add -f origin https://github.com/lion-goose/Dockerfile.git \
         && git config core.sparsecheckout true \
         && echo jd_scripts/* >> /jds/.git/info/sparse-checkout \
-        && git pull origin master \
+        && git pull origin master
 
 RUN cp /jds/jd_scripts/docker_entrypoint.sh /usr/local/bin \
         && chmod +x /usr/local/bin/docker_entrypoint.sh
