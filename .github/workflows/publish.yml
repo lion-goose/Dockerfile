@@ -1,0 +1,18 @@
+  
+name: Publish 
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Sync to Gitee 💕
+              uses: wearerequired/git-mirror-action@master
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+              with:
+                  source-repo: "git@gitee.com:lxk0301/jd_scripts.git"
+                  destination-repo: "git@github.com:lion-goose/JD_Scripts.git"
