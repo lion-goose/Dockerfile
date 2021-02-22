@@ -13,7 +13,7 @@ RUN set -ex \
         && echo "Asia/Shanghai" > /etc/timezone
         
 
-RUN git clone -b $REPO_BRANCH $REPO_URL /scripts \
+RUN git clone ${REPO_URL} /scripts \
         && cd /scripts \
         && git checkout master \
         && mkdir logs \
