@@ -38,4 +38,3 @@ jobs:
           push: true
           tags: |
             liongoose/jd_scripts_bot:latest
-            ghcr.io/${{ steps.repo_name.outputs.lowercase }}/jd_scripts:alpine3.12
