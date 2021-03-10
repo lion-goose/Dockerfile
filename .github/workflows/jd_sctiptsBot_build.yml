@@ -1,7 +1,14 @@
 name: 构建JD Scripts Bot镜像
+
 on:
-  #防止fork乱用action设置只能手动触发构建
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "jd_scripts/Dockerfile.jdbot"
+  repository_dispatch:
+    types: jd_scripts
 
 jobs:
   build-and-push:
@@ -31,3 +38,4 @@ jobs:
           push: true
           tags: |
             liongoose/jd_scripts_bot:latest
+            ghcr.io/${{ steps.repo_name.outputs.lowercase }}/jd_scripts:alpine3.12
