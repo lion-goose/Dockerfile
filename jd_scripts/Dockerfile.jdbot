@@ -3,7 +3,6 @@ LABEL AUTHOR="none"
 
 ENV DEFAULT_LIST_FILE=crontab_list.sh \
         CUSTOM_LIST_MERGE_TYPE=append \
-        GIT_PULL=true \
         GEN_CODE_CONF=/scripts/logs/gen_code_conf.list \
         REPO_URL=https://github.com/lion-goose/JD_Scripts.git
         
@@ -24,7 +23,7 @@ RUN git clone ${REPO_URL} /scripts \
 RUN mkdir /jds \
         && cd  /jds \
         && git init \
-        && git remote add -f origin https://github.com/lion-goose/Dockerfile.git \
+        && git remote add -f origin https://github.com/iouAkira/someDockerfile.git \
         && git config core.sparsecheckout true \
         && echo jd_scripts/* >> /jds/.git/info/sparse-checkout \
         && git pull origin master \
