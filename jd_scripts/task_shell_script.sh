@@ -123,33 +123,6 @@ crontab $mergedListFile
 echo "第11步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
 cat /jds/jd_scripts/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.sh
 
-echo "附加功能1，拉取 i-chenzhe 仓库的代码，并增加相关任务"
-if [ -d "/i-chenzhe" ]; then
-    cd /i-chenzhe
-    git reset --hard
-    echo "git pull拉取最新代码..."
-    git -C /i-chenzhe pull --rebase
-else
-    git clone https://github.com/i-chenzhe/qx.git /i-chenzhe
-fi
-
-cd /i-chenzhe
-for scriptFile in $(ls | grep -E "jd_|z_" | tr "\n" " "); do
-    if [ -n "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $scriptFile)" ]; then
-        cp $scriptFile /scripts
-        if [ -z "$(cat /scripts/befor_cronlist.sh | grep $scriptFile)" ]; then
-            if [ $1 ];then
-                echo "skip"
-            else
-                echo "发现以前crontab里面不存在的任务，先跑为敬 $scriptFile"
-                nohup node /scripts/$scriptFile |ts >>/scripts/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1 &
-            fi
-        fi
-        echo "#$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)" >>$mergedListFile
-        echo "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $scriptFile) spnode /scripts/$scriptFile |ts >>/scripts/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1 &" >>$mergedListFile
-    fi
-done
-
 # echo "第12步打包脚本文件到/scripts/logs/scripts.tar.gz"
 # apk add tar
 # tar -zcvf /scripts/logs/scripts.tar.gz --exclude=scripts/node_modules --exclude=scripts/logs/*.log  --exclude=scripts/logs/*.gz /scripts
