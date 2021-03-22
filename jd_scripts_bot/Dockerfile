@@ -14,7 +14,7 @@ RUN set -ex \
         && apk update && apk upgrade \
         && apk add --no-cache tzdata git \
         && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-        && echo "Asia/Shanghai" > /etc/timezone \
+        && echo "Asia/Shanghai" > /etc/timezone
 
 
 RUN git clone ${REPO_URL} /scripts \
