@@ -19,6 +19,7 @@ function initPythonEnv(){
 #获取配置的自定义参数,如果有为
 if [ $1 ]; then
     run_cmd=$1
+    initNodeEnv
     if [ $GIT_PULL == 'true' ]; then
         echo "设定远程仓库地址..."
         cd /scripts
