@@ -10,7 +10,7 @@ function initPythonEnv(){
     echo "安装运行jd_bot需要的python环境及依赖"
     apk add --update python3-dev py3-pip py3-cryptography py3-numpy py-pillow
     echo "开始安装jd_bot依赖..."
-    cd /jds/jd_scripts/bot
+    cd /jds/jd_scripts_bot/bot
     pip3 install --upgrade pip
     pip3 install -r requirements.txt
     python3 setup.py install
