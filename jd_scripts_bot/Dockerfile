@@ -12,7 +12,7 @@ ENV DEFAULT_LIST_FILE=crontab_list.sh \
 
 RUN set -ex \
         && apk update && apk upgrade\
-        && apk add --no-cache tzdata git openssh-client \
+        && apk add --no-cache tzdata git \
         && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
         && echo "Asia/Shanghai" > /etc/timezone
 
