@@ -3,10 +3,9 @@ set -e
 
 echo "增加一个命令组合spnode ，使用该命令spnode jd_xxxx.js 执行js脚本会读取cookies.conf里面的jd cokie账号来执行脚本"
 (
-    cat <<EOF
+  cat <<EOF
 #!/bin/sh
 set -e
-
 first=\$1
 cmd=\$*
 echo \${cmd/\$1/}
