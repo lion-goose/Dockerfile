@@ -149,7 +149,7 @@ sh /scripts/docker/proc_file.sh
 
 echo "替换node使用spnode执行任务"
 sed -i "s/node/spnode/g" $mergedListFile
-sed -i "/\(jd_xtg.js\|jd_car_exchange.js\)/s/spnode/spnode conc/g" $mergedListFile
+sed -i "/\(jd_carnivalcity.js\|jd_car_exchange.js\)/s/spnode/spnode conc/g" $mergedListFile
 
 echo "第10步加载最新的定时任务文件..."
 crontab -l > /scripts/befor_cronlist.sh
@@ -165,17 +165,17 @@ fi
 
 echo "附加功能1，cookie写入文件，为jd_bot扫码获自动取cookies服务"
 if [ 0"$JD_COOKIE" = "0" ]; then
-    if [ -f "$COOKIES_CONF" ]; then
-        echo '' >$COOKIES_CONF
-        echo "未配置JD_COOKIE环境变量，$COOKIES_CONF文件已生成,请将cookies写入$COOKIES_CONF文件，格式每个Cookie一行"
-    fi
+  if [ -f "$COOKIES_CONF" ]; then
+    echo '' >$COOKIES_CONF
+    echo "未配置JD_COOKIE环境变量，$COOKIES_CONF文件已生成,请将cookies写入$COOKIES_CONF文件，格式每个Cookie一行"
+  fi
 else
-    if [ -f "$COOKIES_CONF" ]; then
-        echo "cookies.conf文件已经存在跳过,如果需要更新cookie请修改$COOKIES_CONF文件内容"
-    else
-        echo "环境变量 cookies写入$COOKIES_CONF文件,如果需要更新cookie请修改cookies.conf文件内容"
-        echo $JD_COOKIE | sed "s/\( &\|&\)/\\n/g" >$COOKIES_CONF
-    fi
+  if [ -f "$COOKIES_CONF" ]; then
+    echo "cookies.conf文件已经存在跳过,如果需要更新cookie请修改$COOKIES_CONF文件内容"
+  else
+    echo "环境变量 cookies写入$COOKIES_CONF文件,如果需要更新cookie请修改cookies.conf文件内容"
+    echo $JD_COOKIE | sed "s/\( &\|&\)/\\n/g" >$COOKIES_CONF
+  fi
 fi
 
 
