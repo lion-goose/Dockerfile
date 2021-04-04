@@ -163,7 +163,7 @@ else
     echo "└──cookies.conf文件已经存在跳过,如果需要更新cookie请修改${COOKIE_LIST}文件内容"
   else
     echo "└──环境变量 cookies写入${COOKIE_LIST}文件,如果需要更新cookie请修改cookies.list文件内容"
-    echo $JD_COOKIE | sed "s/[ &]/\\n/g" | sed "/^$/d" >$COOKIES_LIST
+    echo $JD_COOKIE | sed "s/\( &\|&\)/\\n/g" >"$COOKIE_LIST"
   fi
 fi
 
