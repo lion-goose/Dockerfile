@@ -4,7 +4,7 @@ set -e
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
 echo "附加功能1，使用jds仓库的gen_code_conf.list文件"
-cp /jds/jd_scripts/gen_code_conf.list "$GEN_CODE_LIST"
+cp /jds/jd_scripts_bot/gen_code_conf.list "$GEN_CODE_LIST"
 
 echo "附加功能2，自定义仓库和任务"
 #@shylocks仓库脚本
