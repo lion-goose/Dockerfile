@@ -41,9 +41,6 @@ fi
 mergedListFile="/scripts/docker/merged_list_file.sh"
 echo "└──合并后定时任务文件路径为 ${mergedListFile}"
 
-echo "第1步将默认定时任务列表添加到并后定时任务文件..."
-cat $defaultListFile >$mergedListFile
-
 echo "第2步将默认定时任务列表添加到并后定时任务文件..."
 cat "$defaultListFile" >$mergedListFile
 
@@ -150,10 +147,10 @@ sed -i "/\( ts\| |ts\|| ts\)/!s/>>/\|ts >>/g" $mergedListFile
 
 sed -i "/\(>&1 &\|> &1 &\)/!s/>&1/>\&1 \&/g" $mergedListFile
 
-echo "第9步执行原仓库的附属脚本proc_file.sh"
+echo "第10步执行原仓库的附属脚本proc_file.sh"
 sh /scripts/docker/proc_file.sh
 
-echo "第8步判断是否需要生成${COOKIE_LIST}文件"
+echo "第11步判断是否需要生成${COOKIE_LIST}文件"
 if [ 0"$JD_COOKIE" = "0" ]; then
   if [ -f "$COOKIE_LIST" ]; then
     echo "└──未配置JD_COOKIE环境变量，${COOKIE_LIST}文件已存在,请将cookies写入${COOKIE_LIST}文件，格式每个Cookie一行"
@@ -170,11 +167,11 @@ else
   fi
 fi
 
-echo "第9步加载最新的定时任务文件..."
+echo "第12步加载最新的定时任务文件..."
 crontab -l >/scripts/befor_cronlist.sh
 crontab $mergedListFile
 
-echo "第11步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
+echo "第13步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
 cat /jds/jd_scripts_bot/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.sh
 
 echo "最后加载最新的附加功能定时任务文件..."
@@ -182,7 +179,7 @@ echo "└──替换任务列表的node指令为spnode"
 sed -i "s/ node / spnode /g" $mergedListFile
 crontab $mergedListFile
 
-# echo "第11步打包脚本文件到/scripts/logs/scripts.tar.gz"
+# echo "第14步打包脚本文件到/scripts/logs/scripts.tar.gz"
 # apk add tar
 # tar -zcvf /scripts/logs/scripts.tar.gz --exclude=scripts/node_modules --exclude=scripts/logs/*.log  --exclude=scripts/logs/*.gz /scripts
 #!/bin/sh
