@@ -26,8 +26,8 @@ fi
 cp -f /lion-goose/jd*.js /scripts/
 
 #### monk-coder https://github.com/monk-coder/dust
-rm -rf /monkcoder /scripts/monkcoder_*
-git clone https://github.com/monk-coder/dust.git /monkcoder
+#rm -rf /monkcoder /scripts/monkcoder_*
+#git clone https://github.com/monk-coder/dust.git /monkcoder
 #
 for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
