@@ -44,6 +44,6 @@ wget --no-check-certificate -O /scripts/jd_zjd_tuan.js https://raw.githubusercon
 echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
 
 
-wget --no-check-certificate -O /scripts/z_asus_iqiyi.js https://raw.githubusercontent.com/monk-coder/dust/dust/backup/z_asus_iqiyi.js
-echo "0 0 5-11 4 * node /scripts/z_asus_iqiyi.js |ts >> /scripts/logs/z_asus_iqiyi.log 2>&1" >> /scripts/docker/merged_list_file.sh
+#wget --no-check-certificate -O /scripts/z_asus_iqiyi.js https://raw.githubusercontent.com/monk-coder/dust/dust/backup/z_asus_iqiyi.js
+echo "0 0 5-11 4 * node /monkcoder/backup/z_asus_iqiyi.js |ts >> /scripts/logs/z_asus_iqiyi.log 2>&1" >> /scripts/docker/merged_list_file.sh
 
