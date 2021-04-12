@@ -35,7 +35,7 @@ echo "第1步定义定时任务合并处理用到的文件路径..."
 defaultListFile="/scripts/docker/$DEFAULT_LIST_FILE"
 echo "└──默认文件定时任务文件路径为 ${defaultListFile}"
 if [ "$CUSTOM_LIST_FILE" ]; then
-  customListFile="/scripts/docker/$CUSTOM_LIST_FILE"
+  customListFile="$CUSTOM_LIST_FILE"
   echo "└──自定义定时任务文件路径为 ${customListFile}"
 fi
 mergedListFile="/scripts/docker/merged_list_file.sh"
@@ -81,18 +81,18 @@ echo "第4步判断是否配置了默认脚本更新任务..."
 if [ $(grep -c "default_task.sh" $mergedListFile) -eq '0' ]; then
   echo "└──合并后的定时任务文件，未包含必须的默认定时任务，增加默认定时任务..."
   echo -e >>$mergedListFile
-  echo "26 */1 * * * sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); docker_entrypoint.sh >> /scripts/logs/default_task.log 2>&1" >>$mergedListFile
+  echo "26 */1 * * * docker_entrypoint.sh >> /scripts/logs/default_task.log 2>&1" >>$mergedListFile
 else
   sed -i "/default_task.sh/d" $mergedListFile
   echo "#脚本追加默认定时任务" >>$mergedListFile
-  echo "26 */1 * * * sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); docker_entrypoint.sh >> /scripts/logs/default_task.log 2>&1" >>$mergedListFile
+  echo "26 */1 * * * docker_entrypoint.sh >> /scripts/logs/default_task.log 2>&1" >>$mergedListFile
 fi
 
 echo "第5步判断是否配置了随即延迟参数..."
 if [ "$RANDOM_DELAY_MAX" ]; then
   if [ "$RANDOM_DELAY_MAX" -ge 1 ]; then
     echo "└──已设置随机延迟为 $RANDOM_DELAY_MAX , 设置延迟任务中..."
-    sed -i "/\(jd_bean_sign.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_car_exchange.js\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
+    sed -i "/\(jd_bean_sign.js\|jd_carnivalcity.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_car_exchange.js\|docker_entrypoint.sh\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
   fi
 else
   echo "└──未配置随即延迟对应的环境变量，故不设置延迟任务..."
