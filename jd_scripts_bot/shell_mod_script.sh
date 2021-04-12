@@ -28,8 +28,7 @@ cp -f /lion-goose/jd*.js /scripts/
 #### monk-coder https://github.com/monk-coder/dust
 function monkcoder(){
     # https://github.com/monk-coder/dust
-    echo "未检查到lion-goose仓库脚本，初始化下载相关脚本"
-    [[ ! -d /monkcoder ]] && git clone https://github.com/sensi-ribbed/temple.git /monkcoder
+    [[ ! -d /monkcoder ]] && echo "未检查到monkcoder仓库脚本，初始化下载相关脚本" && git clone https://github.com/sensi-ribbed/temple.git /monkcoder
     echo "更新monkcoder脚本相关文件"
     git -C /monkcoder reset --hard
     git -C /monkcoder pull --rebase
