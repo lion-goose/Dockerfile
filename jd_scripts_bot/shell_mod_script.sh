@@ -26,26 +26,16 @@ fi
 cp -f /lion-goose/jd*.js /scripts/
 
 #### monk-coder https://github.com/monk-coder/dust
-function initDust() {
-    git clone https://github.com/sensi-ribbed/temple.git /monkcoder
-}
-
 function monkcoder(){
-    if [ ! -d "/monkcoder/" ]; then
-        echo "未检查到monkcoder仓库脚本，初始化下载相关脚本"
-        initDust
-    else
-        echo "更新monkcoder脚本相关文件"
-        git -C /monkcoder reset --hard
-        git -C /monkcoder pull --rebase
-        #npm install --loglevel error    
+    # https://github.com/monk-coder/dust
+    [[ ! -d /monkcoder ]] && git clone https://github.com/sensi-ribbed/temple.git /monkcoder
     # 拷贝脚本
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
     # 匹配js脚本中的cron设置定时任务
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    fi
+    done
 }
 
 function main(){
