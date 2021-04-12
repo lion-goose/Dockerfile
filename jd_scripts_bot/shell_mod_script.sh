@@ -39,6 +39,7 @@ function monkcoder(){
         git -C /monkcoder reset --hard
         git -C /monkcoder pull --rebase
         #npm install --loglevel error
+    fi    
     # 拷贝脚本
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
     # 匹配js脚本中的cron设置定时任务
