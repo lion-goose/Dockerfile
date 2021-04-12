@@ -38,15 +38,14 @@ function monkcoder(){
         echo "更新monkcoder脚本相关文件"
         git -C /monkcoder reset --hard
         git -C /monkcoder pull --rebase
-        #npm install --loglevel error
-    fi    
+        #npm install --loglevel error    
     # 拷贝脚本
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
     # 匹配js脚本中的cron设置定时任务
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    done
+    fi
 }
 
 function main(){
