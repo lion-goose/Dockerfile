@@ -28,10 +28,8 @@ cp -f /lion-goose/jd*.js /scripts/
 #### monk-coder https://github.com/monk-coder/dust
 function monkcoder(){
     # https://github.com/monk-coder/dust
-    [[ ! -d /monkcoder ]] && echo "未检查到monkcoder仓库脚本，初始化下载相关脚本" && git clone https://github.com/sensi-ribbed/temple.git /monkcoder
-    echo "更新monkcoder脚本相关文件"
-    git -C /monkcoder reset --hard
-    git -C /monkcoder pull --rebase
+    rm -rf /monkcoder /scripts/monkcoder_*
+    git clone https://github.com/sensi-ribbed/temple.git /monkcoder
     # 拷贝脚本
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
     # 匹配js脚本中的cron设置定时任务
