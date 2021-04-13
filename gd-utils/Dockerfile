@@ -6,6 +6,7 @@ ENV BUILD_VERSION 0.3.7
 RUN set -ex \
         && apk update \
         && apk add --no-cache nodejs npm \
+	&& apk add ca-certificates mailcap curl bash \
         && apk add --no-cache --virtual .build-deps make gcc g++ python3 git \
         && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
         && echo "Asia/Shanghai" > /etc/timezone
@@ -14,7 +15,7 @@ RUN set -ex \
         && echo ${BUILD_VERSION} \
         && git clone https://github.com/iwestlin/gd-utils /root/gd-utils \
         && cd /root/gd-utils \
-        && npm i \
+        && npm install \
         && apk del .build-deps
 
 EXPOSE 23333
