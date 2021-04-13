@@ -14,7 +14,7 @@ RUN set -ex \
         && echo ${BUILD_VERSION} \
         && git clone https://github.com/iwestlin/gd-utils /root/gd-utils \
         && cd /root/gd-utils \
-        && npm i pm2 -g \
+        && npm i \
         && apk del .build-deps
 
 EXPOSE 23333
