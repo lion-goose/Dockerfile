@@ -84,7 +84,7 @@ cp -f /lion-goose/jd*.js /scripts/
 # }
 
 function monkcoder() {
-        apk add --no-cache --upgrade grep
+	apk add --no-cache --upgrade grep
 	i=1
 	while [ "$i" -le 5 ]; do
 		folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
