@@ -47,19 +47,19 @@ function monkcoder(){
     while [ "$i" -le 5 ]; do
         folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
         test -n "$folders" && { for jsname in /scripts/dust_*.js; do mv -f $jsname $(echo $jsname | sed "s/\/scripts\/dust_/\/scripts\/temp_dust_/"); done; break; }
-        test -z "$folders" && { echo 第 $i/5 次目录列表获取失败; i=$(( i + 1 )); }
+        test -z "$folders" && { echo 第 $i/5 次目录列表获取失败; sleep 5; i=$(( i + 1 )); }
     done
     for folder in $folders; do
         i=1
         while [ "$i" -le 5 ]; do
             jsnames="$(curl -sX POST "https://share.r2ray.com/dust/${folder}/" | grep -oP "name.*?\.js\"" | grep -oE "[^\"]*\.js\"" | cut -d\" -f1 | tr "\n" " ")"
-            test -n "$jsnames" && break || { echo 第 $i/5 次 $folder 目录下文件列表获取失败; i=$(( i + 1 )); }
+            test -n "$jsnames" && break || { echo 第 $i/5 次 $folder 目录下文件列表获取失败; sleep 5; i=$(( i + 1 )); }
         done
         for jsname in $jsnames; do 
             i=1
             while [ "$i" -le 5 ]; do
                 [ "$i" -lt 5 ] && curl -so /scripts/dust_${jsname} "https://share.r2ray.com/dust/${folder}/${jsname}"
-                test "$(wc -c <"/scripts/dust_${jsname}")" -ge 1000 && break || { echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败; i=$(( i + 1 )); }
+                cat /scripts/dust_${jsname} | grep -qE "^function" && break || { echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败; sleep 5; i=$(( i + 1 )); }
                 [ "$i" -eq 5 ] && [ -f "/scripts/temp_dust_${jsname}" ] && mv -f /scripts/temp_dust_${jsname} /scripts/dust_${jsname}
             done
         done
