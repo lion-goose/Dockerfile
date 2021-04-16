@@ -2,8 +2,6 @@
 set -e
 
 mergedListFile="/scripts/docker/merged_list_file.sh"
-downpath=/download
-monkpath=/monkcoder_dust
 
 echo "附加功能1，使用jds仓库的gen_code_conf.list文件"
 cp /jds/jd_scripts_bot/gen_code_conf.list "$GEN_CODE_LIST"
