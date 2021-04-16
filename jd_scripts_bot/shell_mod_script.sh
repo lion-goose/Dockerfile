@@ -168,8 +168,8 @@ function diycron(){
 function main(){
     # 首次运行时拷贝docker目录下文件及创建dust脚本使用文件夹
     [[ ! -d /jd_diy ]] && mkdir /jd_diy && cp -rf /scripts/docker/* /jd_diy
-    [[ ! -d "$downpath" ]] && mkdir $downpath
-    [[ ! -d "$monkpath" ]] && mkdir $monkpath
+    [[ ! -d $downpath ]] && mkdir $downpath
+    [[ ! -d $monkpath ]] && mkdir $monkpath
     # DIY脚本执行前后信息
     a_jsnum=$(ls -l $monkpath | grep -oE "^-.*js$" | wc -l)
     a_jsname=$(ls -l $monkpath | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
