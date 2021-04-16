@@ -68,7 +68,7 @@ function monkcoder(){
 }
 
 function diycron(){
-    # monkcoder定时任务
+    # monkcoder 定时任务
     for jsname in /scripts/dust_*.js; do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
         test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
