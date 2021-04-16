@@ -40,36 +40,138 @@ cp -f /lion-goose/jd*.js /scripts/
 # }
 
 
-function monkcoder(){
-    # https://share.r2ray.com/dust/
+# function monkcoder(){
+#     # https://share.r2ray.com/dust/
+#     apk add --no-cache --upgrade grep
+#     i=1
+#     while [ "$i" -le 5 ]; do
+#         folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
+#         test -n "$folders" && { for jsname in /scripts/dust_*.js; do mv -f $jsname $(echo $jsname | sed "s/\/scripts\/dust_/\/scripts\/temp_dust_/"); done; break; }
+#         test -z "$folders" && { echo 第 $i/5 次目录列表获取失败; sleep 5; i=$(( i + 1 )); }
+#     done
+#     for folder in $folders; do
+#         i=1
+#         while [ "$i" -le 5 ]; do
+#             jsnames="$(curl -sX POST "https://share.r2ray.com/dust/${folder}/" | grep -oP "name.*?\.js\"" | grep -oE "[^\"]*\.js\"" | cut -d\" -f1 | tr "\n" " ")"
+#             test -n "$jsnames" && break || { echo 第 $i/5 次 $folder 目录下文件列表获取失败; sleep 5; i=$(( i + 1 )); }
+#         done
+#         for jsname in $jsnames; do 
+#             i=1
+#             while [ "$i" -le 5 ]; do
+#                 [ "$i" -lt 5 ] && curl -so /scripts/dust_${jsname} "https://share.r2ray.com/dust/${folder}/${jsname}"
+#                 cat /scripts/dust_${jsname} | grep -qE "^function" && break || { echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败; sleep 5; i=$(( i + 1 )); }
+#                 [ "$i" -eq 5 ] && [ -f "/scripts/temp_dust_${jsname}" ] && mv -f /scripts/temp_dust_${jsname} /scripts/dust_${jsname}
+#             done
+#         done
+#     done
+#     rm -rf /scripts/temp_dust_*.js
+# }
+
+# function diycron(){
+#     # monkcoder whyour 定时任务
+#     for jsname in /scripts/dust_*.js; do
+#         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
+#         test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
+#     done
+#     #### yangtingxiao https://github.com/yangtingxiao/QuantumultX
+#     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
+#     echo "12 0,16,22 * * * node /scripts/jd_lottery_machine.js |ts >> /scripts/logs/jd_lottery_machine.log 2>&1" >> /scripts/docker/merged_list_file.sh
+#     #### whyour https://github.com/whyour/hundun
+#     wget --no-check-certificate -O /scripts/jd_zjd_tuan.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd_tuan.js
+#     echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
+# }
+
+
+downpath=/download
+monkpath=/monkcoder_dust
+
+function monkcoder() {
     apk add --no-cache --upgrade grep
-    i=1
-    while [ "$i" -le 5 ]; do
-        folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
-        test -n "$folders" && { for jsname in /scripts/dust_*.js; do mv -f $jsname $(echo $jsname | sed "s/\/scripts\/dust_/\/scripts\/temp_dust_/"); done; break; }
-        test -z "$folders" && { echo 第 $i/5 次目录列表获取失败; sleep 5; i=$(( i + 1 )); }
-    done
-    for folder in $folders; do
-        i=1
-        while [ "$i" -le 5 ]; do
-            jsnames="$(curl -sX POST "https://share.r2ray.com/dust/${folder}/" | grep -oP "name.*?\.js\"" | grep -oE "[^\"]*\.js\"" | cut -d\" -f1 | tr "\n" " ")"
-            test -n "$jsnames" && break || { echo 第 $i/5 次 $folder 目录下文件列表获取失败; sleep 5; i=$(( i + 1 )); }
-        done
-        for jsname in $jsnames; do 
-            i=1
-            while [ "$i" -le 5 ]; do
-                [ "$i" -lt 5 ] && curl -so /scripts/dust_${jsname} "https://share.r2ray.com/dust/${folder}/${jsname}"
-                cat /scripts/dust_${jsname} | grep -qE "^function" && break || { echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败; sleep 5; i=$(( i + 1 )); }
-                [ "$i" -eq 5 ] && [ -f "/scripts/temp_dust_${jsname}" ] && mv -f /scripts/temp_dust_${jsname} /scripts/dust_${jsname}
-            done
-        done
-    done
-    rm -rf /scripts/temp_dust_*.js
+	#创建download文件夹
+	if [[ ! -d $downpath ]]; then
+		mkdir $downpath
+	fi
+	#创建monk_coder文件夹
+	if [[ ! -d $monkpath ]]; then
+		mkdir $monkpath
+	fi
+
+	i=1
+
+	while [ "$i" -le 5 ]; do
+		folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
+		test -n "$folders" && {
+			rm -rf $downpath/*
+			break
+		} || {
+			echo 第 $i/5 次目录列表获取失败
+			i=$((i + 1))
+		}
+	done
+
+	for folder in $folders; do
+		i=1
+		while [ "$i" -le 5 ]; do
+			jsnames="$(curl -sX POST "https://share.r2ray.com/dust/${folder}/" | grep -oP "name.*?\.js\"" | grep -oE "[^\"]*\.js\"" | cut -d\" -f1 | tr "\n" " ")"
+			test -n "$jsnames" && break || {
+				echo 第 $i/5 次 $folder 目录下文件列表获取失败
+				i=$((i + 1))
+			}
+		done
+
+		if [ "$i" -eq 5 ]; then
+			continue
+		fi
+
+		cd $downpath
+
+		for jsname in $jsnames; do
+			i=1
+			while [ "$i" -le 5 ]; do
+				curl -so ${jsname} "https://share.r2ray.com/dust/${folder}/${jsname}"
+				test "$(wc -c <"${jsname}")" -ge 500 && {
+					#连接错误后会把错误提示页面下载成Js文件，捕获错误页面内容并排除
+					grep "What happened?" $downpath/$jsname >>/dev/null
+					if [ $? -ne 0 ]; then
+						#echo -e "已下载["$folder"]目录中的["$jsname"]文件."
+						#判断是否新增脚本
+						if [ ! -f "$monkpath/$jsname" ]; then
+							cp $downpath/$jsname $monkpath/
+							echo -e "新增加文件"$jsname
+						else
+							md5download=$(md5sum $downpath/$jsname | cut -d ' ' -f1)
+							md5monkcoder=$(md5sum $monkpath/$jsname | cut -d ' ' -f1)
+							#echo -e "md5download_"$jsname":"$md5download
+							#echo -e "md5monkcode_"$jsname":"$md5monkcoder
+							#判断已存在的脚本是否更新了内容
+							if [[ $md5download != $md5monkcoder ]]; then
+								yes | cp -rf $downpath/$jsname $monkpath/
+								echo -e "更新文件"$jsname
+							fi
+						fi
+						break
+					else
+						#echo -e $jsname"下载地址错误,页面404！！！"
+						echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败
+					fi
+				} || {
+					echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败
+					i=$((i + 1))
+				}
+			done
+
+			if [ "$i" -eq 5 ]; then
+				continue
+			fi
+
+			#echo $folder/$jsname文件下载成功
+		done
+	done
 }
 
 function diycron(){
-    # monkcoder whyour 定时任务
-    for jsname in /scripts/dust_*.js; do
+    # monkcoder定时任务
+    for jsname in $monkpath*.js; do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
         test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
