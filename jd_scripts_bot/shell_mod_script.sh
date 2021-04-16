@@ -86,18 +86,8 @@ downpath="/download"
 monkpath="/monkcoder_dust"
 
 function monkcoder() {
-    apk add --no-cache --upgrade grep
-	#创建download文件夹
-	if [[ ! -d $downpath ]]; then
-		mkdir $downpath
-	fi
-	#创建monk_coder文件夹
-	if [[ ! -d $monkpath ]]; then
-		mkdir $monkpath
-	fi
-
+	apk add --no-cache --upgrade grep
 	i=1
-
 	while [ "$i" -le 5 ]; do
 		folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
 		test -n "$folders" && {
@@ -108,7 +98,6 @@ function monkcoder() {
 			i=$((i + 1))
 		}
 	done
-
 	for folder in $folders; do
 		i=1
 		while [ "$i" -le 5 ]; do
@@ -118,13 +107,10 @@ function monkcoder() {
 				i=$((i + 1))
 			}
 		done
-
 		if [ "$i" -eq 5 ]; then
 			continue
 		fi
-
 		cd $downpath
-
 		for jsname in $jsnames; do
 			i=1
 			while [ "$i" -le 5 ]; do
@@ -159,11 +145,9 @@ function monkcoder() {
 					i=$((i + 1))
 				}
 			done
-
 			if [ "$i" -eq 5 ]; then
 				continue
 			fi
-
 			#echo $folder/$jsname文件下载成功
 		done
 	done
@@ -184,8 +168,10 @@ function diycron(){
 }
 
 function main(){
-    # 首次运行时拷贝docker目录下文件
+    # 首次运行时拷贝docker目录下文件及创建dust脚本使用文件夹
     [[ ! -d /jd_diy ]] && mkdir /jd_diy && cp -rf /scripts/docker/* /jd_diy
+    [[ ! -d $downpath ]] && mkdir $downpath
+    [[ ! -d $monkpath ]] && mkdir $monkpath
     # DIY脚本执行前后信息
     a_jsnum=$(ls -l $monkpath | grep -oE "^-.*js$" | wc -l)
     a_jsname=$(ls -l $monkpath | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
