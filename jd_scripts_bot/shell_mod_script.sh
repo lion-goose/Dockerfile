@@ -82,8 +82,8 @@ cp -f /lion-goose/jd*.js /scripts/
 # }
 
 
-downpath=/download
-monkpath=/monkcoder_dust
+downpath="/download"
+monkpath="/monkcoder_dust"
 
 function monkcoder() {
     apk add --no-cache --upgrade grep
