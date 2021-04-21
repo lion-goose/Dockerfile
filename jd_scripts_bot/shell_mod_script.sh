@@ -51,7 +51,7 @@ function monkcoder(){
         git -C /monkcoder pull --rebase
     fi
     # 拷贝脚本
-    rm -rf /monkcoder /scripts/monkcoder_*
+    rm -rf /scripts/monkcoder_*
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
