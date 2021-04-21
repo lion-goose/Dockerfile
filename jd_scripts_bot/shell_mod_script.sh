@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
+cp /scripts/logs/id_rsa /root/.ssh/id_rsa
+chmod 600 /root/.ssh/id_rsa
+ssh-keyscan github.com > /root/.ssh/known_hosts
+
+
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
 echo "附加功能1，使用jds仓库的gen_code_conf.list文件"
@@ -12,7 +17,7 @@ function initLiongoose() {
     git clone https://github.com/lion-goose/BackUp.git /lion-goose
 }
 
- if [ ! -d "/lion-goose/" ]; then
+if [ ! -d "/lion-goose/" ]; then
     echo "未检查到lion-goose仓库脚本，初始化下载相关脚本"
     initLiongoose
 else
@@ -25,53 +30,33 @@ fi
 ##复制两个文件
 cp -f /lion-goose/jd*.js /scripts/
 
-# #### monk-coder https://github.com/monk-coder/dust
-# function monkcoder(){
-#     # https://github.com/monk-coder/dust
-# #     rm -rf /monkcoder /scripts/monkcoder_*
-# #     git clone https://github.com/sensi-ribbed/temple.git /monkcoder
-#     # 拷贝脚本
-#     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
-#     # 匹配js脚本中的cron设置定时任务
-#     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
-#         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-#         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
-#     done
-# }
 
+#和尚仓库脚本
+function initDust() {
+    git clone git@github.com:monk-coder/dust.git /monkcoder
+}
 
+#### monk-coder https://github.com/monk-coder/dust
 function monkcoder(){
-    # https://share.r2ray.com/dust/
-    apk add --no-cache --upgrade grep
-    i=1
-    while [ "$i" -le 5 ]; do
-        folders="$(curl -sX POST "https://share.r2ray.com/dust/" | grep -oP "name.*?\.folder" | cut -d, -f1 | cut -d\" -f3 | grep -vE "backup|pics|rewrite" | tr "\n" " ")"
-        test -n "$folders" && { for jsname in $(ls -l /scripts | grep -oE "^-.*js$" | awk '{print $NF}' | grep -oE "^dust_.*\.js$"); do mv -f /scripts/$jsname /scripts/temp_$jsname; done; break; }
-        test -z "$folders" && { echo 第 $i/5 次目录列表获取失败; sleep 5; i=$(( i + 1 )); }
-    done
-    for folder in $folders; do
-        i=1
-        while [ "$i" -le 5 ]; do
-            jsnames="$(curl -sX POST "https://share.r2ray.com/dust/${folder}/" | grep -oP "name.*?\.js\"" | grep -oE "[^\"]*\.js\"" | cut -d\" -f1 | tr "\n" " ")"
-            test -n "$jsnames" && break || { echo 第 $i/5 次 $folder 目录下文件列表获取失败; sleep 5; i=$(( i + 1 )); }
-        done
-        for jsname in $jsnames; do 
-            i=1
-            while [ "$i" -le 5 ]; do
-                [ "$i" -lt 5 ] && curl -so /scripts/dust_${jsname} "https://share.r2ray.com/dust/${folder}/${jsname}"
-                cat /scripts/dust_${jsname} | grep -qE "^function" && break || { echo 第 $i/5 次 $folder 目录下 $jsname 文件下载失败; sleep 5; i=$(( i + 1 )); }
-                [ "$i" -eq 5 ] && [ -f "/scripts/temp_dust_${jsname}" ] && mv -f /scripts/temp_dust_${jsname} /scripts/dust_${jsname}
-            done
-        done
-    done
-    rm -rf /scripts/temp_dust_*.js
+    # https://github.com/monk-coder/dust
+    if [ ! -d "/monkcoder/" ]; then
+        echo "未检查到和尚仓库脚本，初始化下载相关脚本"
+        initDust
+    else
+        echo "更新和尚仓库脚本相关文件"
+        git -C /monkcoder reset --hard
+        git -C /monkcoder pull --rebase
+    fi
+    # 拷贝脚本
+    rm -rf /monkcoder /scripts/monkcoder_*
+    for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
 function diycron(){
     # monkcoder 定时任务
-    for jsname in /scripts/dust_*.js; do
+    for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-        test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
+        test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     #### yangtingxiao https://github.com/yangtingxiao/QuantumultX
     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
