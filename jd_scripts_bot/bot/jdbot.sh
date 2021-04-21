@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-JDS_DIR='/jds/jd_scripts'
+JDS_DIR='/jds/jd_scripts_bot'
 BASE_DIR='/scripts'
 
 # bot更新了新功能的话只需要重启容器就完成更新
