@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-cp /scripts/logs/id_rsa /root/.ssh/id_rsa
-chmod 600 /root/.ssh/id_rsa
-ssh-keyscan github.com > /root/.ssh/known_hosts
+if [ ! -d "/root/.ssh/id_rsa" ]; then
+    echo "未检查到仓库密钥，复制密钥"
+    cp /scripts/logs/id_rsa /root/.ssh/id_rsa
+    chmod 600 /root/.ssh/id_rsa
+    ssh-keyscan github.com > /root/.ssh/known_hosts
+fi
+
+
 
 
 mergedListFile="/scripts/docker/merged_list_file.sh"
