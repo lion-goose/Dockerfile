@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ ! -d "/root/.ssh/id_rsa" ]; then
+if [ ! -f "/root/.ssh/id_rsa" ]; then
     echo "未检查到仓库密钥，复制密钥"
     cp /scripts/logs/id_rsa /root/.ssh/id_rsa
     chmod 600 /root/.ssh/id_rsa
