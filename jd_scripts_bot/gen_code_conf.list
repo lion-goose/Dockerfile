@@ -1,4 +1,3 @@
-
 #格式为
 #互助类型-机器人ID-提交代码(根据bot作者配置得来)-活动脚本日志文件名-活动代码(根据bot作者配置得来)-查找互助码取字符串
 #长期活动示例
@@ -24,8 +23,8 @@ temp-@TuringLabbot-/submit_activity_codes-jd_sgmh.log-sgmh-您的好友助力码
 temp-@TuringLabbot-/submit_activity_codes-jd_cfd.log-jxcfd-主】你的互助码: 
 temp-@TuringLabbot-/submit_activity_codes-jd_global.log-jdglobal-好友助力码为 
 temp-@TuringLabbot-/submit_activity_codes-jd_city.log-city-好友助力码：
-temp-@TuringLabbot-/submit_activity_codes-jd_health.log-health-狂欢城好友互助码】
-
+temp-@TuringLabbot-/submit_activity_codes-jd_carnivalcity.log-carnivalcity-狂欢城好友互助码】
+temp-@TuringLabbot-/submit_activity_codes-jd_health.log-health-健康社区好友互助码】
 #分红狗活动
 long-@LvanLamCommitCodeBot-/jdcrazyjoy-jd_crazy_joy.log-@N-crazyJoy任务好友互助码】
 #签到领现金
