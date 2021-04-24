@@ -30,4 +30,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            liongoose/EFB-esw:latest
+            liongoose/efb_esw:latest
