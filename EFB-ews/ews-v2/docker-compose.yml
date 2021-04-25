@@ -1,0 +1,6 @@
+ews_v2:
+    image: liongoose/efb_esw:latest
+    container_name: ews-v2
+    restart: always
+    volumes:
+        - .:/root/.ehforwarderbot/profiles/default/
