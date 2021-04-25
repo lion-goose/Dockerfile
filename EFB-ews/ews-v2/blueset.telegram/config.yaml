@@ -1,0 +1,15 @@
+token: "xxx"#替换为自己的bot Token
+admins:
+    - xxx #替换为自己的Telegram UID
+flags:
+    chats_per_page: 20 #选择/ chat和/ link命令时显示的聊天次数。过大的值可能导致这些命令的故障
+    network_error_prompt_interval: 100 #每收到n个错误后再通知用户有关网络错误的信息。 设置为0可禁用它
+    multiple_slave_chats: true #默认true #将多个远程聊天链接到一个Telegram组。使用未关联的聊天功能发送和回复。禁用以远程聊天和电报组一对一链接。
+    prevent_message_removal: true  #当从通道需要删除消息时，如果此值为true，EFB将忽略该请求。
+    auto_locale: true #自动从管理员的消息中检测区域设置。否则将使用在环境变量中定义的区域设置。
+    retry_on_error: false #在向Telegram Bot API发送请求时发生错误时无限重试。请注意，这可能会导致重复的消息传递，因为Telegram Bot API的响应不可靠，并且可能无法反映实际结果
+    send_image_as_file: false #将所有图片消息以文件发送，以积极避免 Telegram 对于图片的压缩。
+    message_muted_on_slave: "mute" #normal:作为普通信息发送给Telegram silent:发送给Telegram作为正常消息，但没有通知声音 mute:不要发送给Telegram
+    your_message_on_slave: "silent" #在从属通道平台上收到消息时的行为。这将覆盖message_muted_on_slave中的设置。
+    animated_stickers: true #启用对动态贴纸的实验支持。注意：您可能需要安装二进制依赖 ``libcairo`` 才能启用此功能。
+    send_to_last_chat: true #在未绑定的会话中快速回复。enabled：启用此功能并关闭警告。warn：启用该功能，并在自动发送至不同收件人时发出警告。disabled：禁用此功能。
