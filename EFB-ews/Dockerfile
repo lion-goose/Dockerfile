@@ -45,7 +45,7 @@ RUN set -ex \
 RUN set -ex \
         && pip3 install --upgrade pip \
         && pip3 install git+https://github.com/ehForwarderBot/ehForwarderBot.git \
-        && pip3 install git+https://github.com/ehForwarderBot/ehforwarderbot.git \
+        && pip3 install git+https://github.com/ehForwarderBot/efb-telegram-master.git \
         && pip3 install git+https://github.com/ehForwarderBot/efb-wechat-slave.git \
         && pip3 install efb-link-preview-middleware \
         && pip3 install lottie \
