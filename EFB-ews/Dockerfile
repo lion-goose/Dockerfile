@@ -50,6 +50,6 @@ RUN set -ex \
         && pip3 install efb-link-preview-middleware \
         && pip3 install lottie \
         && pip3 install cairosvg \
-        && pip3 install python-telegram-bot --upgrade \
+        && pip3 install python-telegram-bot --upgrade
 
 CMD ["ehforwarderbot"]
