@@ -48,6 +48,8 @@ RUN set -ex \
         && pip3 install git+https://github.com/ehForwarderBot/efb-telegram-master.git \
         && pip3 install git+https://github.com/ehForwarderBot/efb-wechat-slave.git \
         && pip3 install efb-link-preview-middleware \
+        && sed -i 's/channel_emoji = "💬"/channel_emoji = "𝙒𝙚𝙘𝙝𝙖𝙩"/g' /usr/lib/python3.8/site-packages/efb_wechat_slave/__init__.py \
+        && sed -i "s/{self.chat_type_emoji}/丨/g" /usr/lib/python3.8/site-packages/efb_telegram_master/chat.py \
         && pip3 install lottie \
         && pip3 install cairosvg \
         && pip3 install python-telegram-bot --upgrade
