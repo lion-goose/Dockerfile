@@ -1,0 +1,13 @@
+flags:
+    refresh_friends: true #每当请求会话列表时，强制刷新会话列表。默认值: false
+    first_link_only: false #在收到多链接消息时，仅发送第一条链接。默认多链接会发送多条消息。默认值: false
+    max_quote_length: -1 #引用消息中引文的长度限制。设置为 0 关闭引文功能。设置为 -1 则对引文长度不做限制。默认值: -1
+    qr_reload: "master_qr_code" #重新登录时使用的登录方式 "console_qr_code": 将二维码和提示输出到系统标准输出（stdout）。默认"master_qr_code": 将二维码和提示发送到主端。 注意登录时二维码会频繁刷新，请注意二维码可能会导致刷屏.
+    on_log_out: "command" #"idle": 仅通知用户。 "reauth": 通知用户，并立即开始重新登录。默认"command": 通知用户，并等待用户启动重新登录过程。
+    imgcat_qr: false #使用 iTerm2 图像协议 显示二维码。本功能只适用于 iTerm2 用户。默认false
+    delete_on_edit: true #以撤回并重新发送的方式代替编辑消息。默认禁止编辑消息。默认false
+    app_shared_link_mode: "image" #"ignore"：忽略附带的缩略图"upload"：将缩略图上传到公开图床（https://sm.ms），并在日志中输出图片的删除链接.默认"image"：将消息以图片形式发送（不推荐）
+    puid_logs: null # 输出 PUID 相关日志到指定日志路径。请使用绝对路径。PUID 日志可能会根据会话数量和消息吞吐量而占用大量存储空间。默认null
+    send_stickers_and_gif_as_jpeg: false #以 JPEG 图片方式发送自定义表情和 GIF，用于临时绕过微信网页版的自定义表情限制。默认false
+    system_chats_to_include: [filehelper] # 在默认会话列表中显示的特殊系统会话。其内容仅能为 默认 filehelper（文件传输助手）、fmessage（朋友推荐消息）、newsapp（腾讯新闻）、weixin（微信团队）其中零到四个选项。
+    user_agent: null #指定登陆网页版微信时所使用的「用户代理」（user agent）字符串。不指定则使用 itchat 提供的默认值。 默认null
