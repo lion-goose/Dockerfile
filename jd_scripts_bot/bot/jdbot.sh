@@ -40,7 +40,7 @@ function start() {
   else
     echo "启动jd bot..."
     echo " " >"$BASE_DIR/logs/jdbot.log"
-    jdbot.py |ts >>"$BASE_DIR/logs/jdbot.log" 2>&1 &
+    jdbot.py |ts >> "$BASE_DIR/logs/jdbot.log" 2>&1 &
     echo "jd bot已启动..."
   fi
 }
