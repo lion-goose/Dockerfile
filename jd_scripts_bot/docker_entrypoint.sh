@@ -48,7 +48,7 @@ if [ "$run_cmd" ]; then
   if [ "$run_cmd" == 'jdbot' ]; then
     # 启动jdbot安装依赖等操作操作放到后台，不耽阻塞定crontab启动工作
     echo "后台启动jdbot程序..."
-    sh "$BOT_DIR/jdbot.sh" |ts >>"$LOGS_DIR/jdbot_start.log" 2>&1 &
+    sh "$BOT_DIR/jdbot.sh" |ts >> "$LOGS_DIR/jdbot_start.log" 2>&1 &
   fi
   echo "启动crontab定时任务主进程..."
   crond -f
