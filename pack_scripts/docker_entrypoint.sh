@@ -29,6 +29,10 @@ echo "==========================================================================
 echo "Initialization complete..."
 echo "初始化完成..."
 
+echo "Load the latest crontab task file..."
+echo "加载最新的定时任务文件..."
+crontab /pss/crontab_list.sh
+
 echo "Start crontab task main process..."
 echo "启动crondtab定时任务主进程..."
 crond -f
