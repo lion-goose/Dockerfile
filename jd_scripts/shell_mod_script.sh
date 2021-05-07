@@ -27,6 +27,8 @@ function main(){
     fi
     cp /scripts/logs/config.json /get_CCB/config.json
     initCcbPythonEnv
+    echo "0 */3 * * * cd /get_CCB/ && python3 keepAlive.py |ts >> /scripts/logs/ccbkeepAlive.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "5 0 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 main
 
