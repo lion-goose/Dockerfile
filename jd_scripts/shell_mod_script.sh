@@ -21,7 +21,7 @@ function main(){
         echo "未检查到get_CCB仓库脚本，初始化下载相关脚本"
         initCcb
     else
-        echo "更新lion-goose脚本相关文件"
+        echo "更新get_CCB脚本相关文件"
         git -C /get_CCB reset --hard
         git -C /get_CCB pull --rebase
     fi
