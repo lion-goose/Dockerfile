@@ -11,7 +11,7 @@ fi
 
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
-sed -i 's/jOkIZzWCgGa9NfPuHBSx1A/AkOULcXbUA_8EAPbYLLMgg/g' scripts/jd_speed_redpocke.js
+sed -i 's/jOkIZzWCgGa9NfPuHBSx1A/AkOULcXbUA_8EAPbYLLMgg/g' /scripts/jd_speed_redpocke.js
 
 echo "附加功能1，使用jds仓库的gen_code_conf.list文件"
 cp /jds/jd_scripts_bot/gen_code_conf.list "$GEN_CODE_LIST"
