@@ -26,6 +26,7 @@ RUN mkdir /logs \
         && git config core.sparsecheckout true \
         && echo pack_scripts/* >> /pss/.git/info/sparse-checkout \
         && git pull origin master \
+        && cp /pss/pack_scripts/crontab_list.sh /pss/crontab_list.sh
 
 # 支持喜马拉雅极速版仓库
 RUN git clone https://github.com/leeyiding/get_CCB.git /get_CCB \
