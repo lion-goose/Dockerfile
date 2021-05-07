@@ -1,8 +1,0 @@
-my_script:
-  image: liongoose/pack_scripts:latest
-  container_name: pack_scripts
-  restart: always
-  tty: true
-  volumes:
-    - ./logs:/logs
-    - ./config.json:/get_CCB/config.json #挂载get_CCB配置文件
