@@ -28,10 +28,10 @@ RUN mkdir /logs \
         && git pull origin master \
         && cp /pss/pack_scripts/crontab_list.sh /pss/crontab_list.sh
 
-# 支持喜马拉雅极速版仓库
+# leeyiding/get_CCB仓库
 RUN git clone https://github.com/leeyiding/get_CCB.git /get_CCB \
         && cd /get_CCB \
-        && git checkout master \
+        && git checkout main \
         && pip3 install --upgrade pip \
         && pip3 install -r requirements.txt
 
