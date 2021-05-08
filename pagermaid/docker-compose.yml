@@ -1,0 +1,12 @@
+version: "2.0"
+services:
+  pagermaid:
+    image: liongoose/pagermaid:latest
+    restart: always
+    container_name: pagermaid
+    hostname: pagermaid
+    network_mode: bridge
+    #ports:                 # 是否开启网页控制面板
+      #- "3333:3333"
+    volumes:
+      - ./:/pagermaid
