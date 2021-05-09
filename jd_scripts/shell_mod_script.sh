@@ -6,7 +6,7 @@ function initCcbPythonEnv() {
   echo "开始安装运行get_CCB需要的python环境及依赖..."
   apk add --update python3-dev py3-pip
   echo "开始安装get_CCB依赖..."
-  cd /wget_CCB
+  cd /get_CCB
   pip3 install --upgrade pip
   pip3 install -r requirements.txt
 }
