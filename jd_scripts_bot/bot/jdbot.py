@@ -1078,7 +1078,7 @@ def main():
         admin_id = os.getenv('TG_USER_ID')
 
     
-    crontab_list_file = '/scripts/docker/merged_list_file.sh'
+    crontab_list_file = 'merged_list_file.sh'
 
     logger.info('CRONTAB_LIST_FILE=' + crontab_list_file)
 
