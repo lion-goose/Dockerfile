@@ -32,7 +32,7 @@ function main(){
         cp /scripts/logs/config.json /get_CCB/config.json
     fi
     if type python3 >/dev/null 2>&1; then
-    echo "get_CCB所需环境已经存在，跳过安装依赖环境"
+        echo "get_CCB所需环境已经存在，跳过安装依赖环境"
     else
         echo "get_CCB所需环境不存在，初始化所需python3及依赖环境"
         initCcbPythonEnv
