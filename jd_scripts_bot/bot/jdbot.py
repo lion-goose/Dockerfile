@@ -27,7 +27,7 @@ _base_dir = '/scripts/'
 _logs_dir = '%slogs/' % _base_dir
 _docker_dir = '%sdocker/' % _base_dir
 _bot_dir = '%sbot/' % _docker_dir
-_share_code_conf = '%scode_gen_conf.list' % _logs_dir
+_share_code_conf = '%sgen_code_conf.list' % _logs_dir
 
 if 'GEN_CODE_LIST' in os.environ:
     share_code_conf = os.getenv("GEN_CODE_LIST")
