@@ -32,7 +32,7 @@ function main(){
         cp /scripts/logs/config.json /get_CCB/config.json
     fi
     if type python3 >/dev/null 2>&1; then
-        cd /wget_CCB
+        cd /get_CCB
         pip3 install -r requirements.txt
         echo "get_CCB所需环境已经存在，跳过安装依赖环境"
     else
