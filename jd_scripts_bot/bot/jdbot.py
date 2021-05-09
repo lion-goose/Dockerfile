@@ -762,7 +762,7 @@ def shcmd(update, context):
         commands = update.message.text.split()
         commands.remove('/cmd')
         if len(commands) > 0:
-            support_cmd = ["echo", "ls", "pwd", "cp", "mv", "ps", "wget", "cat", "sed", "git", "apk", "sh",
+            support_cmd = ["echo", "ls", "pwd", "cp", "mv", "ps", "wget", "cat", "sed", "git", "apk", "sh", "crontab -l"
                            "docker_entrypoint.sh"]
             if commands[0] in support_cmd:
                 sp_cmd = ["sh", "docker_entrypoint.sh"]
