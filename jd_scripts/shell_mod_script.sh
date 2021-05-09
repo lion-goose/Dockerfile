@@ -8,7 +8,7 @@ function initCcbPythonEnv() {
   echo "开始安装get_CCB依赖..."
   cd /get_CCB
   pip3 install --upgrade pip
-  pip3 install -r requests
+  pip3 install requests
 }
 
 # 下载leeyiding/get_CCB仓库
