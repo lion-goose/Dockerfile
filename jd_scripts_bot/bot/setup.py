@@ -9,5 +9,5 @@ from setuptools import setup
 setup(
     name='jd-scripts-bot',
     version='0.2',
-    scripts=['jd_bot.py', ],
+    scripts=['jdbot.py', ],
 )
