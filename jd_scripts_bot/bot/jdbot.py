@@ -27,7 +27,7 @@ _base_dir = '/scripts/'
 _logs_dir = '%slogs/' % _base_dir
 _docker_dir = '%sdocker/' % _base_dir
 _bot_dir = '%sbot/' % _docker_dir
-_share_code_conf = '%sgen_code_conf.list' % _logs_dir
+_share_code_conf = '%scode_gen_conf.list' % _logs_dir
 
 if 'GEN_CODE_LIST' in os.environ:
     share_code_conf = os.getenv("GEN_CODE_LIST")
@@ -59,7 +59,6 @@ def start(update, context):
                                       "/logs 获取logs下的日志文件列表，选择对应名字可以下载日志文件\n" \
                                       "/env 获取系统环境变量列表。(拓展使用：设置系统环境变量，例：/env export JD_DEBUG=true，环境变量只针对当前bot进程生效) \n" \
                                       "/cmd 执行执行命令。参考：/cmd ls -l 涉及目录文件操作请使用绝对路径,部分shell命令开放使用\n" \
-                                      "/crontab 查看定时任务。\n" \
                                       "/eikooc_dj_teg 获取cookie。\n" \
                                       "/gen_long_code 长期活动互助码提交消息生成\n" \
                                       "/gen_temp_code 短期临时活动互助码提交消息生成\n" \
@@ -762,7 +761,7 @@ def shcmd(update, context):
         commands = update.message.text.split()
         commands.remove('/cmd')
         if len(commands) > 0:
-            support_cmd = ["echo", "ls", "pwd", "cp", "mv", "ps", "wget", "cat", "sed", "git", "apk", "sh", "crontab -l",
+            support_cmd = ["echo", "ls", "pwd", "cp", "mv", "ps", "wget", "cat", "sed", "git", "apk", "sh",
                            "docker_entrypoint.sh"]
             if commands[0] in support_cmd:
                 sp_cmd = ["sh", "docker_entrypoint.sh"]
@@ -1051,7 +1050,6 @@ def unknown(update, context):
                                        "/logs 获取logs下的日志文件列表，选择对应名字可以下载日志文件\n" \
                                        "/env 获取系统环境变量列表。(拓展使用：设置系统环境变量，例：/env export JD_DEBUG=true，环境变量只针对当前bot进程生效) \n" \
                                        "/cmd 执行执行命令。参考：/cmd ls -l 涉及目录文件操作请使用绝对路径,部分shell命令开放使用\n" \
-                                       "/crontab 查看定时任务。\n" \
                                        "/eikooc_dj_teg 获取cookie。\n" \
                                        "/gen_long_code 长期活动互助码提交消息生成\n" \
                                        "/gen_temp_code 短期临时活动互助码提交消息生成\n" \
@@ -1077,8 +1075,10 @@ def main():
     if 'TG_USER_ID' in os.environ:
         admin_id = os.getenv('TG_USER_ID')
 
-    
-    crontab_list_file = 'merged_list_file.sh'
+    if 'CRONTAB_LIST_FILE' in os.environ:
+        crontab_list_file = os.getenv('CRONTAB_LIST_FILE')
+    else:
+        crontab_list_file = 'crontab_list.sh'
 
     logger.info('CRONTAB_LIST_FILE=' + crontab_list_file)
 
