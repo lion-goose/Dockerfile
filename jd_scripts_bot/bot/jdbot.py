@@ -29,8 +29,8 @@ _docker_dir = '%sdocker/' % _base_dir
 _bot_dir = '%sbot/' % _docker_dir
 _share_code_conf = '%scode_gen_conf.list' % _logs_dir
 
-if 'GEN_CODE_CONF' in os.environ:
-    share_code_conf = os.getenv("GEN_CODE_CONF")
+if 'GEN_CODE_LIST' in os.environ:
+    share_code_conf = os.getenv("GEN_CODE_LIST")
     if share_code_conf.startswith("/"):
         _share_code_conf = share_code_conf
 
