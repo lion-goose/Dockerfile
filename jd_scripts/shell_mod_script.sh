@@ -6,7 +6,7 @@ function initCcbPythonEnv() {
   echo "开始安装运行get_CCB需要的python环境及依赖..."
   apk add --update python3-dev py3-pip
   echo "开始安装get_CCB依赖..."
-  cd /get_CCB
+  cd /wget_CCB
   pip3 install --upgrade pip
   pip3 install -r requirements.txt
 }
@@ -32,6 +32,7 @@ function main(){
         cp /scripts/logs/config.json /get_CCB/config.json
     fi
     if type python3 >/dev/null 2>&1; then
+        cd /wget_CCB
         pip3 install -r requirements.txt
         echo "get_CCB所需环境已经存在，跳过安装依赖环境"
     else
