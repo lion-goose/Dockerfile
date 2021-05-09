@@ -21,11 +21,16 @@ function main(){
         echo "未检查到get_CCB仓库脚本，初始化下载相关脚本"
         initCcb
     else
-        echo "更新get_CCB脚本相关文件"
+        echo "更新get_CCB仓库相关脚本文件"
         git -C /get_CCB reset --hard
         git -C /get_CCB pull --rebase
     fi
-    cp /scripts/logs/config.json /get_CCB/config.json
+    if [ -f "/get_CCB/config.json" ]; then
+        echo "存在cookie配置文件，跳过操作..."
+    else
+        echo "复制cookie配置文件..."
+        cp /scripts/logs/config.json /get_CCB/config.json
+    fi
     if type python3 >/dev/null 2>&1; then
     echo "get_CCB所需环境已经存在，跳过安装依赖环境"
     else
@@ -33,7 +38,7 @@ function main(){
         initCcbPythonEnv
     fi
     echo "0 */3 * * * cd /get_CCB/ && python3 keepAlive.py |ts >> /scripts/logs/ccbkeepAlive.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    echo "5 0 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "15 9 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 main
 
