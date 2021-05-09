@@ -32,13 +32,14 @@ function main(){
         cp /scripts/logs/config.json /get_CCB/config.json
     fi
     if type python3 >/dev/null 2>&1; then
+        pip3 install -r requirements.txt
         echo "get_CCB所需环境已经存在，跳过安装依赖环境"
     else
         echo "get_CCB所需环境不存在，初始化所需python3及依赖环境"
         initCcbPythonEnv
     fi
-    echo "0 */3 * * * cd /get_CCB/ && python3 keepAlive.py |ts >> /scripts/logs/ccbkeepAlive.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    echo "15 9 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "48 */3 * * * cd /get_CCB/ && python3 keepAlive.py |ts >> /scripts/logs/ccbkeepAlive.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "12 9,21 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 main
 
