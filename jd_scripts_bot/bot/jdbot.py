@@ -59,6 +59,7 @@ def start(update, context):
                                       "/logs 获取logs下的日志文件列表，选择对应名字可以下载日志文件\n" \
                                       "/env 获取系统环境变量列表。(拓展使用：设置系统环境变量，例：/env export JD_DEBUG=true，环境变量只针对当前bot进程生效) \n" \
                                       "/cmd 执行执行命令。参考：/cmd ls -l 涉及目录文件操作请使用绝对路径,部分shell命令开放使用\n" \
+                                      "/cmd cat /scripts/docker/merged_list_file.sh 查看定时任务列表。\n" \
                                       "/eikooc_dj_teg 获取cookie。\n" \
                                       "/gen_long_code 长期活动互助码提交消息生成\n" \
                                       "/gen_temp_code 短期临时活动互助码提交消息生成\n" \
