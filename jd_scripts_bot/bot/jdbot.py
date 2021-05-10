@@ -1079,7 +1079,7 @@ def main():
     if 'CRONTAB_LIST_FILE' in os.environ:
         crontab_list_file = os.getenv('CRONTAB_LIST_FILE')
     else:
-        crontab_list_file = 'merged_list_file.sh'
+        crontab_list_file = 'crontab_list.sh'
 
     logger.info('CRONTAB_LIST_FILE=' + crontab_list_file)
 
