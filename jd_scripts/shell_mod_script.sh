@@ -25,12 +25,8 @@ function main(){
         git -C /get_CCB reset --hard
         git -C /get_CCB pull --rebase
     fi
-    if [ -f "/get_CCB/config.json" ]; then
-        echo "存在cookie配置文件，跳过操作..."
-    else
-        echo "复制cookie配置文件..."
-        cp /scripts/logs/config.json /get_CCB/config.json
-    fi
+    echo "更新cookie配置文件..."
+    cp /scripts/logs/config.json /get_CCB/config.json
     if type python3 >/dev/null 2>&1; then
         echo "get_CCB所需环境已经存在，跳过安装依赖环境"
     else
