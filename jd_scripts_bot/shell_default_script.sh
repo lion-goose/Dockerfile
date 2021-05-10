@@ -103,18 +103,19 @@ if [ 0"$CUSTOM_SHELL_FILE" = "0" ]; then
   echo "└──未配置自定shell脚本文件，跳过执行。"
 else
   if expr "$CUSTOM_SHELL_FILE" : 'http.*' &>/dev/null; then
-    echo "└──自定义shell脚本为远程脚本，开始下在自定义远程脚本${CUSTOM_SHELL_FILE}。"
-    wget -O /jds/shell_mod.sh "$CUSTOM_SHELL_FILE"
+    echo "└──自定义shell脚本为远程脚本，开始下载自定义远程脚本。"
+    wget -O /scripts/docker/shell_script_mod.sh $CUSTOM_SHELL_FILE
     echo "└──下载完成，开始执行..."
     echo "#远程自定义shell脚本追加定时任务" >>$mergedListFile
-    sh /jds/shell_mod.sh
+    sh -x /scripts/docker/shell_script_mod.sh
     echo "└──自定义远程shell脚本下载并执行结束。"
   else
-    if [ ! -f "$CUSTOM_SHELL_FILE" ]; then
-      echo "└──自定义shell脚本为docker挂载脚本文件，但是指定挂载文件${CUSTOM_SHELL_FILE}不存在，跳过执行。"
+    if [ ! -f $CUSTOM_SHELL_FILE ]; then
+      echo "自定义shell脚本为docker挂载脚本文件，但是指定挂载文件不存在，跳过执行。"
     else
-      echo "┌───────────────────────docker挂载的自定shell脚本，开始执行。───────────────────────┐"
-      sh "$CUSTOM_SHELL_FILE" | sed 's/^/    ─> &/g'
+      echo "┌───────────────────────docker挂载的自定shell脚本，开始执行...───────────────────────┐"
+      echo "#docker挂载自定义shell脚本追加定时任务" >>$mergedListFile
+      sh -x $CUSTOM_SHELL_FILE
       echo "└───────────────────────docker挂载的自定shell脚本，执行结束。───────────────────────┘"
     fi
   fi
@@ -122,7 +123,7 @@ fi
 
 echo "第7步删除不运行的脚本任务..."
 if [ $DO_NOT_RUN_SCRIPTS ]; then
-  echo "您配置了不运行的脚本：$DO_NOT_RUN_SCRIPTS"
+  echo "└──您配置了不运行的脚本：$DO_NOT_RUN_SCRIPTS"
   arr=${DO_NOT_RUN_SCRIPTS//&/ }
   for item in $arr; do
     sed -ie '/'"${item}"'/d' ${mergedListFile}
@@ -134,21 +135,19 @@ echo "第8步 自动助力"
 if [ -n "$ENABLE_AUTO_HELP" ]; then
   #直接判断变量，如果未配置，会导致sh抛出一个错误，所以加了上面一层
   if [ "$ENABLE_AUTO_HELP" = "true" ]; then
-    echo "开启自动助力"
+    echo "└──开启自动助力"
     #在所有脚本执行前，先执行助力码导出
     sed -i 's/node/ . \/scripts\/docker\/auto_help.sh export > \/scripts\/logs\/auto_help_export.log \&\& node /g' ${mergedListFile}
   else
-    echo "未开启自动助力"
+    echo "└──未开启自动助力"
   fi
 fi
 
 echo "第9步增加 |ts 任务日志输出时间戳..."
 sed -i "/\( ts\| |ts\|| ts\)/!s/>>/\|ts >>/g" $mergedListFile
 
-sed -i "/\(>&1 &\|> &1 &\)/!s/>&1/>\&1 \&/g" $mergedListFile
-
 echo "第10步执行原仓库的附属脚本proc_file.sh"
-sh /scripts/docker/proc_file.sh
+sh -x /scripts/docker/proc_file.sh
 
 echo "第11步判断是否需要生成${COOKIE_LIST}文件"
 if [ 0"$JD_COOKIE" = "0" ]; then
@@ -163,12 +162,11 @@ else
     echo "└──cookies.conf文件已经存在跳过,如果需要更新cookie请修改${COOKIE_LIST}文件内容"
   else
     echo "└──环境变量 cookies写入${COOKIE_LIST}文件,如果需要更新cookie请修改cookies.list文件内容"
-    echo $JD_COOKIE | sed "s/\( &\|&\)/\\n/g" >"$COOKIE_LIST"
+    echo "$COOKIE_LIST" | sed "s/\( &\|&\)/\\n/g" >"$COOKIE_LIST"
   fi
 fi
 
 echo "第12步加载最新的定时任务文件..."
-crontab -l >/scripts/befor_cronlist.sh
 crontab $mergedListFile
 
 echo "第13步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
