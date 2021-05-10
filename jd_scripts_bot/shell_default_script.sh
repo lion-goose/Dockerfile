@@ -34,10 +34,6 @@ chmod +x /usr/local/bin/spnode
 echo "第1步定义定时任务合并处理用到的文件路径..."
 defaultListFile="/scripts/docker/$DEFAULT_LIST_FILE"
 echo "└──默认文件定时任务文件路径为 ${defaultListFile}"
-if [ "$CUSTOM_LIST_FILE" ]; then
-  customListFile="$CUSTOM_LIST_FILE"
-  echo "└──自定义定时任务文件路径为 ${customListFile}"
-fi
 mergedListFile="/scripts/docker/merged_list_file.sh"
 echo "└──合并后定时任务文件路径为 ${mergedListFile}"
 
@@ -92,7 +88,7 @@ echo "第5步判断是否配置了随即延迟参数..."
 if [ "$RANDOM_DELAY_MAX" ]; then
   if [ "$RANDOM_DELAY_MAX" -ge 1 ]; then
     echo "└──已设置随机延迟为 $RANDOM_DELAY_MAX , 设置延迟任务中..."
-    sed -i "/\(jd_bean_sign.js\|jd_jxcfdtx.js\|jd_carnivalcity.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_car_exchange.js\|docker_entrypoint.sh\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
+    sed -i "/\(jd_bean_sign.js\|jd_carnivalcity.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_car_exchange.js\|docker_entrypoint.sh\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
   fi
 else
   echo "└──未配置随即延迟对应的环境变量，故不设置延迟任务..."
@@ -145,8 +141,6 @@ fi
 echo "第9步增加 |ts 任务日志输出时间戳..."
 sed -i "/\( ts\| |ts\|| ts\)/!s/>>/\|ts >>/g" $mergedListFile
 
-sed -i "/\(>&1 &\|> &1 &\)/!s/>&1/>\&1 \&/g" $mergedListFile
-
 echo "第10步执行原仓库的附属脚本proc_file.sh"
 sh /scripts/docker/proc_file.sh
 
@@ -163,12 +157,11 @@ else
     echo "└──cookies.conf文件已经存在跳过,如果需要更新cookie请修改${COOKIE_LIST}文件内容"
   else
     echo "└──环境变量 cookies写入${COOKIE_LIST}文件,如果需要更新cookie请修改cookies.list文件内容"
-    echo $JD_COOKIE | sed "s/\( &\|&\)/\\n/g" >"$COOKIE_LIST"
+    echo "$COOKIE_LIST" | sed "s/\( &\|&\)/\\n/g" >"$COOKIE_LIST"
   fi
 fi
 
 echo "第12步加载最新的定时任务文件..."
-crontab -l >/scripts/befor_cronlist.sh
 crontab $mergedListFile
 
 echo "第13步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
@@ -177,6 +170,7 @@ cat /jds/jd_scripts_bot/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.s
 echo "最后加载最新的附加功能定时任务文件..."
 echo "└──替换任务列表的node指令为spnode"
 sed -i "s/ node / spnode /g" $mergedListFile
+sed -i "/jd_carnivalcity/s/>>/>/g" $mergedListFile
 echo "添加一些可以并发启动的脚本"
 sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\)/s/spnode/spnode conc/g" $mergedListFile
 crontab $mergedListFile
