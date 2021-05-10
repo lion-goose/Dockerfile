@@ -78,7 +78,7 @@ def node(update, context):
             try:
 
                 out_bytes = subprocess.check_output(
-                    cmd, shell=True, timeout=600, stderr=subprocess.STDOUT)
+                    cmd, shell=True, timeout=1000, stderr=subprocess.STDOUT)
 
                 out_text = out_bytes.decode('utf-8')
 
@@ -132,7 +132,7 @@ def spnode(update, context):
             try:
 
                 out_bytes = subprocess.check_output(
-                    cmd, shell=True, timeout=600, stderr=subprocess.STDOUT)
+                    cmd, shell=True, timeout=1000, stderr=subprocess.STDOUT)
 
                 out_text = out_bytes.decode('utf-8')
 
@@ -327,7 +327,7 @@ def callback_run(update, context):
                                           chat_id=query.message.chat_id,
                                           message_id=query.message.message_id, parse_mode=ParseMode.MARKDOWN_V2)
             out_bytes = subprocess.check_output(
-                query.data, shell=True, timeout=600, stderr=subprocess.STDOUT)
+                query.data, shell=True, timeout=1000, stderr=subprocess.STDOUT)
             out_text = out_bytes.decode('utf-8')
             if len(out_text.split()) > 50:
                 context.bot.edit_message_text(text='```{}```'.format(' ↓↓↓ %s 执行结果超长,请查看log ↓↓↓' % query.data),
@@ -1078,7 +1078,7 @@ def main():
     if 'CRONTAB_LIST_FILE' in os.environ:
         crontab_list_file = os.getenv('CRONTAB_LIST_FILE')
     else:
-        crontab_list_file = 'crontab_list.sh'
+        crontab_list_file = 'merged_list_file.sh'
 
     logger.info('CRONTAB_LIST_FILE=' + crontab_list_file)
 
