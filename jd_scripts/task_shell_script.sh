@@ -102,13 +102,15 @@ if [ $DO_NOT_RUN_SCRIPTS ]; then
 fi
 
 echo "第7步 自动助力"
-if [ $ENABLE_AUTO_HELP = "true" ]; then
+if [ -n "$ENABLE_AUTO_HELP" ]; then
+  #直接判断变量，如果未配置，会导致sh抛出一个错误，所以加了上面一层
+  if [ "$ENABLE_AUTO_HELP" = "true" ]; then
     echo "开启自动助力"
-    
     #在所有脚本执行前，先执行助力码导出
     sed -i 's/node/ . \/scripts\/docker\/auto_help.sh export > \/scripts\/logs\/auto_help_export.log \&\& node /g' ${mergedListFile}
-else
+  else
     echo "未开启自动助力"
+  fi
 fi
 
 echo "第8步增加 |ts 任务日志输出时间戳..."
