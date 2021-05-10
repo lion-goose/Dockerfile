@@ -170,7 +170,6 @@ cat /jds/jd_scripts_bot/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.s
 echo "最后加载最新的附加功能定时任务文件..."
 echo "└──替换任务列表的node指令为spnode"
 sed -i "s/ node / spnode /g" $mergedListFile
-sed -i "/jd_carnivalcity/s/>>/>/g" $mergedListFile
 echo "添加一些可以并发启动的脚本"
 sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\)/s/spnode/spnode conc/g" $mergedListFile
 crontab $mergedListFile
