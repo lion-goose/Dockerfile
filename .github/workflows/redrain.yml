@@ -1,0 +1,22 @@
+
+name: "构建RedRain"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: 构建RedRain
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@master
+      - name: Build and publish image
+        uses: ilteoood/docker_buildx@master
+        with:
+          publish: true
+          imageName: liongoose/redrain
+          dockerFile: redrain/Dockerfile
+          platform: linux/amd64
+          tag: latest
+          dockerUser: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerPassword: ${{ secrets.DOCKERHUB_TOKEN }}
