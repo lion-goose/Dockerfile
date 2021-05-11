@@ -167,9 +167,9 @@ crontab $mergedListFile
 echo "第13步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
 cat /jds/jd_scripts_bot/docker_entrypoint.sh >/usr/local/bin/docker_entrypoint.sh
 
-echo "最后加载最新的附加功能定时任务文件..."
-echo "└──替换任务列表的node指令为spnode"
-sed -i "s/ node / spnode /g" $mergedListFile
-echo "添加一些可以并发启动的脚本"
-sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\)/s/spnode/spnode conc/g" $mergedListFile
-crontab $mergedListFile
+#echo "最后加载最新的附加功能定时任务文件..."
+#echo "└──替换任务列表的node指令为spnode"
+#sed -i "s/ node / spnode /g" $mergedListFile
+#echo "添加一些可以并发启动的脚本"
+#sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\)/s/spnode/spnode conc/g" $mergedListFile
+#crontab $mergedListFile
