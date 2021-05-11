@@ -11,6 +11,7 @@ fi
 
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
+sed -i 's/COOKIES_LIST/COOKIE_LIST/g' /scripts/docker/auto_help.sh
 
 echo "附加功能1，使用jds仓库的gen_code_conf.list文件"
 cp /jds/jd_scripts_bot/gen_code_conf.list "$GEN_CODE_LIST"
