@@ -58,8 +58,7 @@ def start(update, context):
                                       "/git 获取可执行git指令列表，选择对应的按钮执行。(拓展使用：运行指定路径脚本，例：/git -C /scripts/ pull)\n" \
                                       "/logs 获取logs下的日志文件列表，选择对应名字可以下载日志文件\n" \
                                       "/env 获取系统环境变量列表。(拓展使用：设置系统环境变量，例：/env export JD_DEBUG=true，环境变量只针对当前bot进程生效) \n" \
-                                      "/cmd 执行执行命令。参考：/cmd ls -l 涉及目录文件操作请使用绝对路径,部分shell命令开放使用\n" \
-                                      "/cmd cat /scripts/docker/merged_list_file.sh 查看定时任务列表。\n" \
+                                      "/cmd 执行执行命令。(参考：/cmd ls -l，支持的命令：echo|ls|pwd|cp|mv|ps|wget|cat|sed|git|apk|sh|docker_entrypoint.sh|/scripts/docker/merged_list_file.sh) \n" \
                                       "/eikooc_dj_teg 获取cookie。\n" \
                                       "/gen_long_code 长期活动互助码提交消息生成\n" \
                                       "/gen_temp_code 短期临时活动互助码提交消息生成\n" \
@@ -1050,7 +1049,7 @@ def unknown(update, context):
                                        "/git 获取可执行git指令列表，选择对应的按钮执行。(拓展使用：运行指定路径脚本，例：/git -C /scripts/ pull)\n" \
                                        "/logs 获取logs下的日志文件列表，选择对应名字可以下载日志文件\n" \
                                        "/env 获取系统环境变量列表。(拓展使用：设置系统环境变量，例：/env export JD_DEBUG=true，环境变量只针对当前bot进程生效) \n" \
-                                       "/cmd 执行执行命令。参考：/cmd ls -l 涉及目录文件操作请使用绝对路径,部分shell命令开放使用\n" \
+                                       "/cmd 执行执行命令。(参考：/cmd ls -l，支持的命令：echo|ls|pwd|cp|mv|ps|wget|cat|sed|git|apk|sh|docker_entrypoint.sh|/scripts/docker/merged_list_file.sh) \n" \
                                        "/eikooc_dj_teg 获取cookie。\n" \
                                        "/gen_long_code 长期活动互助码提交消息生成\n" \
                                        "/gen_temp_code 短期临时活动互助码提交消息生成\n" \
