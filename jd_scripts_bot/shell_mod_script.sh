@@ -66,6 +66,7 @@ function monkcoder(){
 function jddj(){
     rm -rf /scripts/jddj
     initJddj
+    echo "更新京东到家仓库完成..."
 }
 
 function diycron(){
