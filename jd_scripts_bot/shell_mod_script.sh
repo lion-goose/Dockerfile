@@ -64,18 +64,15 @@ function initJddj() {
 
 #### JDDJ https://github.com/passerby-b/JDDJ
 function jddj(){
-    # https://github.com/passerby-b/JDDJ
-    if [ ! -d "/JDDJ/" ]; then
-        echo "未检查到JDDJ仓库脚本，初始化下载相关脚本"
-        initJddj
-    else
-        echo "更新JDDJ仓库脚本相关文件"
-        git -C /JDDJ reset --hard
-        git -C /JDDJ pull --rebase
-    fi
-    # 拷贝脚本
-    rm -rf /scripts/jddj_*
-    for jsname in $(ls /JDDJ | grep -oE ".*\js$"); do cp -rf /JDDJ/$jsname /scripts/jddj_$jsname; done
+    # 备份cookie文件
+    [[ -f /scripts/jddj/jddj_cookie.js ]] && cp -rf /scripts/jddj/jddj_cookie.js /scripts/backup_jddj_cookie.js
+    # clone
+    rm -rf /scripts/jddj && git clone https://github.com/passerby-b/JDDJ.git /scripts/jddj
+    # 下载自定义cookie文件地址,如私密的gist地址,需修改
+    jddj_cookiefile="https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_cookie.js"
+    curl -so /scripts/jddj/jddj_cookie.js $jddj_cookiefile
+    # 下载cookie文件失败时从备份恢复
+    test $? -eq 0 || cp -rf /scripts/jddj/backup_jddj_cookie.js /scripts/backup_jddj_cookie.js
 }
 
 function diycron(){
@@ -85,9 +82,9 @@ function diycron(){
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     # JDDJ 定时任务
-    for jsname in /scripts/jddj_*.js; do
-        jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-        test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
+    for jsname in $(ls /scripts/jddj | grep -E "js$" | tr "\n" " "); do
+        jsnamecron="$(cat /scripts/jddj/$jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
+        test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /scripts/logs/jddj_$jsname.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     #### yangtingxiao https://github.com/yangtingxiao/QuantumultX
     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
