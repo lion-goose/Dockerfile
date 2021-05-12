@@ -64,7 +64,7 @@ function monkcoder(){
 
 #### JDDJ https://github.com/passerby-b/JDDJ
 function jddj(){
-    if [ ! -f "/scripts/jddj/jddj_cookie.js" ]; then
+    if [ ! -d "/scripts/jddj/" ]; then
         echo "未检查到京东到家仓库，初始化下载相关脚本"
         initJddj
     else
@@ -108,24 +108,17 @@ function diycron(){
 function main(){
     # 首次运行时拷贝docker目录下文件及创建dust脚本使用文件夹
     [[ ! -d /jd_diy ]] && mkdir /jd_diy && cp -rf /scripts/docker/* /jd_diy
-    # 首次运行时创建京东到家仓库目录
-    [[ ! -d /scripts/jddj ]] && mkdir -p /scripts/jddj
     # DIY脚本执行前后信息
     a_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     a_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
-    c_jsnum=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | wc -l)
-    c_jsname=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
     monkcoder
     jddj
     b_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     b_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
-    d_jsnum=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | wc -l)
-    d_jsname=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
     # DIY任务
     diycron
     # DIY脚本更新TG通知
     info_more=$(echo $a_jsname  $b_jsname | tr " " "\n" | sort | uniq -c | grep -oE "1 .*$" | grep -oE "[^ ]*js$" | tr "\n" " ")
-    info_more=$(echo $c_jsname  $d_jsname | tr " " "\n" | sort | uniq -c | grep -oE "1 .*$" | grep -oE "[^ ]*js$" | tr "\n" " ")
     [[ "$a_jsnum" == "0" || "$a_jsnum" == "$b_jsnum" ]] || curl -sX POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d "chat_id=$TG_USER_ID&text=DIY脚本更新完成：$a_jsnum $b_jsnum $info_more" >/dev/null
     # LXK脚本更新TG通知
     lxktext="$(diff /jd_diy/crontab_list.sh /scripts/docker/crontab_list.sh | grep -E "^[+-]{1}[^+-]+" | grep -oE "node.*\.js" | cut -d/ -f3 | tr "\n" " ")"
