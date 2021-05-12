@@ -57,17 +57,21 @@ function monkcoder(){
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
+#京东到家仓库脚本
+function initJddj() {
+    git clone https://github.com/passerby-b/JDDJ.git /scripts/jddj
+}
+
 #### JDDJ https://github.com/passerby-b/JDDJ
 function jddj(){
-    # 备份cookie文件
-    [[ -f /scripts/jddj/jddj_cookie.js ]] && cp -rf /scripts/jddj/jddj_cookie.js /scripts/backup_jddj_cookie.js
-    # clone
-    rm -rf /scripts/jddj && git clone https://github.com/passerby-b/JDDJ.git /scripts/jddj
-    # 下载自定义cookie文件地址,如私密的gist地址,需修改
-    jddj_cookiefile="https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_cookie.js"
-    curl -so /scripts/jddj/jddj_cookie.js $jddj_cookiefile
-    # 下载cookie文件失败时从备份恢复
-    test $? -eq 0 || cp -rf /scripts/jddj/backup_jddj_cookie.js /scripts/backup_jddj_cookie.js
+    if [ ! -d "/scripts/jddj/" ]; then
+        echo "未检查到京东到家仓库，初始化下载相关脚本"
+        initJddj
+    else
+        echo "更新京东到家仓库脚本相关文件"
+        git -C /scripts/jddj reset --hard
+        git -C /scripts/jddj pull --rebase
+    fi
 }
 
 function diycron(){
@@ -107,14 +111,19 @@ function main(){
     # DIY脚本执行前后信息
     a_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     a_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
+    c_jsnum=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | wc -l)
+    c_jsname=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
     monkcoder
     jddj
     b_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     b_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
+    d_jsnum=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | wc -l)
+    d_jsname=$(ls -l /scripts/jddj | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
     # DIY任务
     diycron
     # DIY脚本更新TG通知
     info_more=$(echo $a_jsname  $b_jsname | tr " " "\n" | sort | uniq -c | grep -oE "1 .*$" | grep -oE "[^ ]*js$" | tr "\n" " ")
+    info_more=$(echo $c_jsname  $d_jsname | tr " " "\n" | sort | uniq -c | grep -oE "1 .*$" | grep -oE "[^ ]*js$" | tr "\n" " ")
     [[ "$a_jsnum" == "0" || "$a_jsnum" == "$b_jsnum" ]] || curl -sX POST "https://api.telegram.org/bot$TG_BOT_TOKEN/sendMessage" -d "chat_id=$TG_USER_ID&text=DIY脚本更新完成：$a_jsnum $b_jsnum $info_more" >/dev/null
     # LXK脚本更新TG通知
     lxktext="$(diff /jd_diy/crontab_list.sh /scripts/docker/crontab_list.sh | grep -E "^[+-]{1}[^+-]+" | grep -oE "node.*\.js" | cut -d/ -f3 | tr "\n" " ")"
