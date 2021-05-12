@@ -57,11 +57,6 @@ function monkcoder(){
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
-#JDDJ仓库脚本
-function initJddj() {
-    git clone https://github.com/passerby-b/JDDJ.git /JDDJ
-}
-
 #### JDDJ https://github.com/passerby-b/JDDJ
 function jddj(){
     # 备份cookie文件
