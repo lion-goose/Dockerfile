@@ -41,6 +41,11 @@ function initDust() {
     git clone git@github.com:monk-coder/dust.git /monkcoder
 }
 
+#京东到家仓库脚本
+function initJddj() {
+    git clone https://github.com/passerby-b/JDDJ.git /scripts/jddj
+}
+
 #### monk-coder https://github.com/monk-coder/dust
 function monkcoder(){
     # https://github.com/monk-coder/dust
@@ -55,11 +60,6 @@ function monkcoder(){
     # 拷贝脚本
     rm -rf /scripts/monkcoder_*
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
-}
-
-#京东到家仓库脚本
-function initJddj() {
-    git clone https://github.com/passerby-b/JDDJ.git /scripts/jddj
 }
 
 #### JDDJ https://github.com/passerby-b/JDDJ
