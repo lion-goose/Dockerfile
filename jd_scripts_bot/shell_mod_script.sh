@@ -57,11 +57,34 @@ function monkcoder(){
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
+#JDDJ仓库脚本
+function initJddj() {
+    git clone https://github.com/passerby-b/JDDJ.git /JDDJ
+}
+
+#### JDDJ https://github.com/passerby-b/JDDJ
+function jddj(){
+    # https://github.com/passerby-b/JDDJ
+    if [ ! -d "/JDDJ/" ]; then
+        echo "未检查到JDDJ仓库脚本，初始化下载相关脚本"
+        initJddj
+    else
+        echo "更新JDDJ仓库脚本相关文件"
+        git -C /JDDJ reset --hard
+        git -C /JDDJ pull --rebase
+    fi
+}
+
 function diycron(){
     # monkcoder 定时任务
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    done
+    # JDDJ 定时任务
+    for jsname in /JDDJ/*.js; do
+        jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
+        test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     #### yangtingxiao https://github.com/yangtingxiao/QuantumultX
     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
@@ -90,6 +113,7 @@ function main(){
     a_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     a_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
     monkcoder
+    jddj
     b_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     b_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
     # DIY任务
