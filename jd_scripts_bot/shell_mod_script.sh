@@ -73,6 +73,9 @@ function jddj(){
         git -C /JDDJ reset --hard
         git -C /JDDJ pull --rebase
     fi
+    # 拷贝脚本
+    rm -rf /scripts/jddj_*
+    for jsname in $(ls /JDDJ | grep -oE ".*\js$"); do cp -rf /JDDJ/$jsname /scripts/jddj_$jsname; done
 }
 
 function diycron(){
@@ -82,7 +85,7 @@ function diycron(){
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     # JDDJ 定时任务
-    for jsname in /JDDJ/*.js; do
+    for jsname in /scripts/jddj_*.js; do
         jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
         test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/$(echo $jsname | cut -d/ -f3).log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
@@ -100,9 +103,9 @@ function diycron(){
     #https://github.com/nianyuguai/longzhuzhu
     wget --no-check-certificate -O /scripts/lzz_half_redrain.js https://raw.githubusercontent.com/nianyuguai/longzhuzhu/main/qx/jd_half_redrain.js
     echo "30 20-23/1 * * * node /scripts/lzz_half_redrain.js |ts >> /scripts/logs/lzz_half_redrain.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    # https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
-    #wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
-    #echo "30 10 * * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    #https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
+    wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
+    echo "55 17 */7 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
