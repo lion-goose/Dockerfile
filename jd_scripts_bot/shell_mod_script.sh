@@ -108,6 +108,8 @@ function diycron(){
 function main(){
     # 首次运行时拷贝docker目录下文件及创建dust脚本使用文件夹
     [[ ! -d /jd_diy ]] && mkdir /jd_diy && cp -rf /scripts/docker/* /jd_diy
+    # 首次运行时创建京东到家仓库目录
+    [[ ! -d /scripts/jddj ]] && mkdir -p /scripts/jddj
     # DIY脚本执行前后信息
     a_jsnum=$(ls -l /scripts | grep -oE "^-.*js$" | wc -l)
     a_jsname=$(ls -l /scripts | grep -oE "^-.*js$" | grep -oE "[^ ]*js$")
