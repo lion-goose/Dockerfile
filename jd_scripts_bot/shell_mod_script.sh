@@ -64,14 +64,8 @@ function monkcoder(){
 
 #### JDDJ https://github.com/passerby-b/JDDJ
 function jddj(){
-    if [ ! -d "/scripts/jddj/" ]; then
-        echo "未检查到京东到家仓库，初始化下载相关脚本"
-        initJddj
-    else
-        echo "更新京东到家仓库脚本相关文件"
-        git -C /scripts/jddj reset --hard
-        git -C /scripts/jddj pull --rebase
-    fi
+    rm -rf /scripts/jddj
+    initJddj
 }
 
 function diycron(){
