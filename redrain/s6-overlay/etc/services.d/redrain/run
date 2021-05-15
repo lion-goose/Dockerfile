@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+rm -rf /root/.pm2/logs/* 2>/dev/null
+cd $DIR
+exec s6-setuidgid root pm2 start $NAME.py -x --watch --ignore-watch "*.se* *.list *.txt *.sh *.yml *.log .* *.bak*" --no-daemon
