@@ -78,6 +78,7 @@ function diycron(){
     # JDDJ 定时任务
     for jsname in /scripts/jddj/*.js; do
         if [ -n "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $jsname)" ]; then
+            echo "#京东到家仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $jsname)($jsname)" >>$mergedListFile
             echo "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $jsname) node /scripts/$jsname |ts >>/scripts/logs/$(echo $jsname | sed "s/.js/.log/g") 2>&1 &" >>$mergedListFile
         fi
     done
