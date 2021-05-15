@@ -76,9 +76,9 @@ function diycron(){
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     # JDDJ 定时任务
-    for jsname in $(ls /scripts/jddj | grep -E "js$" | tr "\n" " "); do
-        jsnamecron="$(cat /scripts/jddj/$jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-        test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /scripts/logs/jddj_$jsname.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    for jsname in /scripts/jddj/*.js; do
+        jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
+        test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/jddj_$jsname.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     #### yangtingxiao https://github.com/yangtingxiao/QuantumultX
     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
