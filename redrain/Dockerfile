@@ -1,3 +1,4 @@
+  
 FROM python:alpine
 ARG TMP_NAME=redrain
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
@@ -7,22 +8,22 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     PS1="\u@\h:\w \$ " \
     NAME=$TMP_NAME \
     DIR="/$TMP_NAME"
-COPY redrain/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY --from=nevinee/s6-overlay-stage:latest / /
+COPY s6-overlay /
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update -f \
     && apk --no-cache add -f \
-        bash \
-        coreutils \
-        tzdata \
-        node \
-        yarn \
+       bash \
+       coreutils \
+       tzdata \
+       nodejs-current \
+       npm \
     && rm -rf /var/cache/apk/* \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && npm install -g pm2 \
+    && rm -rf /root/.npm \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    # && pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple \
-    && python -m pip install --upgrade pip \
-    && pip install telethon requests pysocks httpx pyyaml datetime \
-    && yarn global add pm2
+    && pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple \
+    && pip install telethon requests pysocks httpx pyyaml datetime
 WORKDIR $DIR
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/init"]
