@@ -77,8 +77,9 @@ function diycron(){
     done
     # JDDJ 定时任务
     for jsname in /scripts/jddj/*.js; do
-        jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-        test -z "$jsnamecron" || echo "$jsnamecron node $jsname >> /scripts/logs/jddj_$jsname.log 2>&1" >> /scripts/docker/merged_list_file.sh
+        if [ -n "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $jsname)" ]; then
+            echo "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $jsname) node /scripts/$jsname |ts >>/scripts/logs/$(echo $jsname | sed "s/.js/.log/g") 2>&1 &" >>$mergedListFile
+        fi
     done
     #### yangtingxiao https://github.com/yangtingxiao/QuantumultX
     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
