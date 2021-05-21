@@ -90,7 +90,7 @@ function diycron(){
     echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #https://github.com/nianyuguai/longzhuzhu
     wget --no-check-certificate -O /scripts/lzz_super_redrain.js https://raw.githubusercontent.com/nianyuguai/longzhuzhu/main/qx/jd_super_redrain.js
-    echo "1 0-23/1 * * * node /scripts/lzz_super_redrain.js |ts >> /scripts/logs/lzz_super_redrain.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "0,1 0-23/1 * * * node /scripts/lzz_super_redrain.js |ts >> /scripts/logs/lzz_super_redrain.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #https://github.com/nianyuguai/longzhuzhu
     wget --no-check-certificate -O /scripts/lzz_half_redrain.js https://raw.githubusercontent.com/nianyuguai/longzhuzhu/main/qx/jd_half_redrain.js
     echo "30 20-23/1 * * * node /scripts/lzz_half_redrain.js |ts >> /scripts/logs/lzz_half_redrain.log 2>&1" >> /scripts/docker/merged_list_file.sh
