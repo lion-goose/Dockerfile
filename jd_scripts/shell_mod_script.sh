@@ -33,8 +33,8 @@ function main(){
         echo "get_CCB所需环境不存在，初始化所需python3及依赖环境"
         initCcbPythonEnv
     fi
-    echo "48 */3 * * * cd /get_CCB/ && python3 keepAlive.py |ts >> /scripts/logs/ccbkeepAlive.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    echo "12 9,15,21 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    #echo "48 */3 * * * cd /get_CCB/ && python3 keepAlive.py |ts >> /scripts/logs/ccbkeepAlive.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    #echo "12 9,15,21 * * * cd /get_CCB/ && python3 main.py |ts >> /scripts/logs/ccbmain.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 main
 
