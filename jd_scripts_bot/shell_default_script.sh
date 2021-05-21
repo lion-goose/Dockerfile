@@ -165,7 +165,7 @@ echo "第12步加载最新的定时任务文件..."
 crontab $mergedListFile
 
 echo "添加一些可以并发启动的脚本"
-sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\|jd_jxcfdtx.js\|jd_car_exchange.js\)/s/node/spnode conc/g" $mergedListFile
+sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\|jd_jxcfdtx.js\|jd_car_exchange.js\|lzz_super_redrain.js\|lzz_half_redrain.js\)/s/node/spnode conc/g" $mergedListFile
 crontab $mergedListFile
 
 echo "第13步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
