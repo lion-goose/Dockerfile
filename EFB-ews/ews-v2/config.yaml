@@ -3,4 +3,4 @@ slave_channels:
     - blueset.wechat
 middlewares:
     - catbaron.link_preview
-    - catbaron.mp_instanceview
+    - catbaron.mp_instantview
