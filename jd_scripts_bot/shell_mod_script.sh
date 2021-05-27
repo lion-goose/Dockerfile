@@ -60,6 +60,7 @@ function monkcoder(){
     # 拷贝脚本
     rm -rf /scripts/monkcoder_*
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
+    sed -i 's/40 9-18/0 */g' /scripts/monkcoder_adolf_star.js
 }
 
 #### JDDJ https://github.com/passerby-b/JDDJ
