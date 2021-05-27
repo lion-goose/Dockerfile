@@ -88,7 +88,7 @@ echo "第5步判断是否配置了随即延迟参数..."
 if [ "$RANDOM_DELAY_MAX" ]; then
   if [ "$RANDOM_DELAY_MAX" -ge 1 ]; then
     echo "└──已设置随机延迟为 $RANDOM_DELAY_MAX , 设置延迟任务中..."
-    sed -i "/\(jd_bean_sign.js\|jd_jxcfdtx.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_car_exchange.js\|docker_entrypoint.sh\|jd_xtg.js\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
+    sed -i "/\(jd_bean_sign.js\|jd_jxcfdtx.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_car_exchange.js\|docker_entrypoint.sh\|monkcoder_adolf_star.js\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
   fi
 else
   echo "└──未配置随即延迟对应的环境变量，故不设置延迟任务..."
@@ -165,7 +165,7 @@ echo "第12步加载最新的定时任务文件..."
 crontab $mergedListFile
 
 echo "添加一些可以并发启动的脚本"
-sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\|jd_jxcfdtx.js\|jd_car_exchange.js\|lzz_super_redrain.js\|lzz_half_redrain.js\|jd_xtg.js\)/s/node/spnode conc/g" $mergedListFile
+sed -i "/\(jd_joy_reward.js\|jd_blueCoin.js\|jd_jxcfdtx.js\|jd_car_exchange.js\|lzz_super_redrain.js\|lzz_half_redrain.js\|monkcoder_adolf_star.js\)/s/node/spnode conc/g" $mergedListFile
 crontab $mergedListFile
 
 echo "第13步将仓库的docker_entrypoint.sh脚本更新至系统/usr/local/bin/docker_entrypoint.sh内..."
