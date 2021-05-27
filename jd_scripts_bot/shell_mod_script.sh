@@ -59,7 +59,7 @@ function monkcoder(){
     fi
     # 拷贝脚本
     rm -rf /scripts/monkcoder_*
-    sed -i 's/40 9-18\/3/0 0/g' /monkcoder/adolf_star.js
+    sed -i 's/40 9-18\/3/0 0/g' /monkcoder/normal/adolf_star.js
     for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
