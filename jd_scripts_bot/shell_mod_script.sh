@@ -38,7 +38,7 @@ cp -f /lion-goose/jd*.js /scripts/
 
 #和尚仓库脚本
 function initDust() {
-    git clone git@github.com:monk-coder/dust.git /monkcoder
+    git clone git@github.com:sensi-ribbed/Secretly-temple.git /monkcoder
 }
 
 #京东到家仓库脚本
