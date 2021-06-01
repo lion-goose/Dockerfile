@@ -94,7 +94,19 @@ else
   echo "└──未配置随即延迟对应的环境变量，故不设置延迟任务..."
 fi
 
-echo "第6步判断是否配置自定义shell执行脚本..."
+echo "第6步 自动助力"
+if [ -n "$ENABLE_AUTO_HELP" ]; then
+  #直接判断变量，如果未配置，会导致sh抛出一个错误，所以加了上面一层
+  if [ "$ENABLE_AUTO_HELP" = "true" ]; then
+    echo "开启自动助力"
+    #在所有脚本执行前，先执行助力码导出
+    sed -i 's/node/ . \/scripts\/docker\/auto_help.sh export > \/scripts\/logs\/auto_help_export.log \&\& node /g' ${mergedListFile}
+  else
+    echo "未开启自动助力"
+  fi
+fi
+
+echo "第7步判断是否配置自定义shell执行脚本..."
 if [ 0"$CUSTOM_SHELL_FILE" = "0" ]; then
   echo "└──未配置自定shell脚本文件，跳过执行。"
 else
@@ -116,7 +128,7 @@ else
   fi
 fi
 
-echo "第7步删除不运行的脚本任务..."
+echo "第8步删除不运行的脚本任务..."
 if [ $DO_NOT_RUN_SCRIPTS ]; then
   echo "您配置了不运行的脚本：$DO_NOT_RUN_SCRIPTS"
   arr=${DO_NOT_RUN_SCRIPTS//&/ }
@@ -126,17 +138,6 @@ if [ $DO_NOT_RUN_SCRIPTS ]; then
 
 fi
 
-echo "第8步 自动助力"
-if [ -n "$ENABLE_AUTO_HELP" ]; then
-  #直接判断变量，如果未配置，会导致sh抛出一个错误，所以加了上面一层
-  if [ "$ENABLE_AUTO_HELP" = "true" ]; then
-    echo "开启自动助力"
-    #在所有脚本执行前，先执行助力码导出
-    sed -i 's/node/ . \/scripts\/docker\/auto_help.sh export > \/scripts\/logs\/auto_help_export.log \&\& node /g' ${mergedListFile}
-  else
-    echo "未开启自动助力"
-  fi
-fi
 
 echo "第9步增加 |ts 任务日志输出时间戳..."
 sed -i "/\( ts\| |ts\|| ts\)/!s/>>/\|ts >>/g" $mergedListFile
