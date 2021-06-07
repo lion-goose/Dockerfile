@@ -93,6 +93,8 @@ function diycron(){
     echo "0 2,9 * * * node /scripts/whyour_jx_nc.js |ts >> /scripts/logs/whyour_jx_nc.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/jd_zjd_tuan.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd_tuan.js
     echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/mopo_jx_mc.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js
+    echo "8 */4 * * * node /scripts/mopo_jx_mc.js |ts >> /scripts/logs/mopo_jx_mc.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #https://github.com/nianyuguai/longzhuzhu
 #     wget --no-check-certificate -O /scripts/lzz_super_redrain.js https://raw.githubusercontent.com/nianyuguai/longzhuzhu/main/qx/jd_super_redrain.js
 #     echo "0,1 0-23/1 * * * node /scripts/lzz_super_redrain.js |ts >> /scripts/logs/lzz_super_redrain.log 2>&1" >> /scripts/docker/merged_list_file.sh
