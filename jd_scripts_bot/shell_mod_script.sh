@@ -91,6 +91,8 @@ function diycron(){
     #### whyour https://github.com/whyour/hundun
     wget --no-check-certificate -O /scripts/whyour_jx_nc.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js
     echo "0 2,9 * * * node /scripts/whyour_jx_nc.js |ts >> /scripts/logs/whyour_jx_nc.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/whyour_jx_factory.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js
+    echo "13 */4 * * * node /scripts/whyour_jx_factory.js |ts >> /scripts/logs/whyour_jx_factory.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/jd_zjd_tuan.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd_tuan.js
     echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/mopo_jx_mc.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js
