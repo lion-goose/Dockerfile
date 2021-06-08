@@ -35,6 +35,30 @@ fi
 ##复制两个文件
 cp -f /lion-goose/jd*.js /scripts/
 
+echo "附加功能3，拉取@curtinlv的 JD-Script仓库的代码，并增加相关任务"
+if [ ! -d "/curtinlv/" ]; then
+    echo "未检查到@curtinlv的仓库脚本，初始化下载相关脚本..."
+    git clone https://github.com/curtinlv/JD-Script.git /curtinlv
+else
+    echo "更新@curtinlv的会员开卡脚本相关文件..."
+    git -C /curtinlv reset --hard
+    git -C /curtinlv pull --rebase
+fi
+
+
+if type python3 >/dev/null 2>&1; then
+    echo "会员开卡脚本需环境经存在，跳过安装依赖环境"
+    if [[ "$(pip3 list | grep Telethon)" == "" || "$(pip3 list | grep APScheduler)" == "" ]]; then
+        pip3 install requests
+    fi
+else
+    echo "会员开卡脚本需要python3环境，安装所需python3及依赖环境"
+    apk add --update python3-dev py3-pip
+    pip3 install requests
+fi
+echo "#curtinlv的关注有礼任务 " >>$mergedListFile
+echo "5 12,18 * * * cd /curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
+
 
 #和尚仓库脚本
 function initDust() {
