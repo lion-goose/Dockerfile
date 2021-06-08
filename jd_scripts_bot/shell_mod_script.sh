@@ -57,7 +57,7 @@ else
     pip3 install requests
 fi
 echo "#curtinlv的关注有礼任务 " >>$mergedListFile
-echo "5 12,18 * * * cd /curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
+echo "5 12,18 * * * cd /curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >> /scripts/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
 
 
 #和尚仓库脚本
