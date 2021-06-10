@@ -129,7 +129,7 @@ function diycron(){
 #     echo "1 20 1-18 6 * node /scripts/long_hby_lottery.js |ts >> /scripts/logs/long_hby_lottery.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
     wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
-    echo "55 17 */7 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
