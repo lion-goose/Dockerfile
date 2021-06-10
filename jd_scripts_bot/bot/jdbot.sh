@@ -19,9 +19,8 @@ function start() {
   if type python3 >/dev/null 2>&1; then
     echo "jdbot所需环境已经存在，跳过安装依赖环境"
     if [[ "$(pip3 list | grep myqr)" == "" ]]; then
-        cd "$JDS_DIR/bot"
-        pip3 install --upgrade pip
-        pip3 install -r requirements.txt
+        echo "jdbot所需环境不完整，初始化所需python3及依赖环境"
+        initBotPythonEnv
     fi
   else
     echo "jdbot所需环境不存在，初始化所需python3及依赖环境"
