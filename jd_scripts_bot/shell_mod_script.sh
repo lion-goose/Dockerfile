@@ -124,7 +124,7 @@ function diycron(){
     echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### moposmall https://github.com/moposmall/Script/tree/main/Me
     wget --no-check-certificate -O /scripts/moposmall_jx_cfd.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd.js
-    echo "0 1,9,17 * * * node /scripts/moposmall_jx_cfd.js |ts >> /scripts/logs/moposmall_jx_cfd.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "0 0,9,17 * * * node /scripts/moposmall_jx_cfd.js |ts >> /scripts/logs/moposmall_jx_cfd.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/moposmall_jx_mc.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js
     echo "5 2,10,18 * * * node /scripts/moposmall_jx_mc.js |ts >> /scripts/logs/moposmall_jx_mc.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/moposmall_jx_mc_coin.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_coin.js
