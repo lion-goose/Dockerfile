@@ -10,7 +10,7 @@ echo "附加功能2，创建其他任务"
 if [ ! -d "/scripts/somescripts/" ]; then
     echo "任务文件不存在，创建任务文件夹"
     cp -r /data/somescripts/ /scripts/somescripts
- else
+else
     echo "任务存在，跳过..."
 fi
 echo "创建其他定时任务"
