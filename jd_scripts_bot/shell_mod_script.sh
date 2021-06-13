@@ -130,7 +130,13 @@ function diycron(){
     wget --no-check-certificate -O /scripts/moposmall_jx_mc_coin.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_coin.js
     echo "10 */4 * * * node /scripts/moposmall_jx_mc_coin.js |ts >> /scripts/logs/moposmall_jx_mc_coin.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/moposmall_jx_mc_emptycabbage.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_emptycabbage.js
-    echo "15 3,11,19 * * * node /scripts/moposmall_jx_mc_emptycabbage.js |ts >> /scripts/logs/moposmall_jx_mc_emptycabbage.log 2>&1" >> /scripts/docker/merged_list_file.sh   
+    echo "15 3,11,19 * * * node /scripts/moposmall_jx_mc_emptycabbage.js |ts >> /scripts/logs/moposmall_jx_mc_emptycabbage.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    #### star261 https://github.com/star261/jd/tree/main/scripts
+    wget --no-check-certificate -O /scripts/jd_star_shop.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_star_shop.js
+    wget --no-check-certificate -O /scripts/jd_zoo.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zoo.js
+    wget --no-check-certificate -O /scripts/jd_zooCollect.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zooCollect.js
+    wget --no-check-certificate -O /scripts/jd_zooMap.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zooMap.js
+    echo "25 3,10,19 * * * node /scripts/jd_zooMap.js |ts >> /scripts/logs/jd_zooMap 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
