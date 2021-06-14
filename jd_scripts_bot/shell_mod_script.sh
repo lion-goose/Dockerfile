@@ -137,6 +137,8 @@ function diycron(){
     wget --no-check-certificate -O /scripts/jd_zooCollect.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zooCollect.js
     wget --no-check-certificate -O /scripts/jd_zooMap.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zooMap.js
     echo "25 3,10,19 * * * node /scripts/jd_zooMap.js |ts >> /scripts/logs/jd_zooMap 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/star_jd_jxmc.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_jxmc.js
+    echo "52 */4 * * * node /scripts/star_jd_jxmc.js |ts >> /scripts/logs/star_jd_jxmc 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
