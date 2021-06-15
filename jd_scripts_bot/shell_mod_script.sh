@@ -102,6 +102,7 @@ function diycron(){
     done
     # JDDJ 定时任务
     # 添加农场和工厂文件
+    cp -f /scripts/jdCookie.js /scripts/jddj
     cp -f /scripts/jdFruitShareCodes.js /scripts/jddj
     cp -f /scripts/jdDreamFactoryShareCodes.js /scripts/jddj
     for jsname in $(ls /scripts/jddj | grep -E "js$" | tr "\n" " "); do
