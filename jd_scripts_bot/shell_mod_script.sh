@@ -101,6 +101,9 @@ function diycron(){
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     # JDDJ 定时任务
+    # 替换农场和工厂脚本
+    cp -f /scripts/jddj/jd_fruit.js /scripts/
+    cp -f /scripts/jddj/jd_dreamFactory.js /scripts/
     for jsname in $(ls /scripts/jddj | grep -E "js$" | tr "\n" " "); do
         jsname_cn="$(grep "cron" /scripts/jddj/$jsname | grep -oE "/?/?tag\=.*" | cut -d"=" -f2)"
         jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
