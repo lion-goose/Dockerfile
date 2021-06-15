@@ -101,9 +101,6 @@ function diycron(){
         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
     done
     # JDDJ 定时任务
-    # 替换农场和工厂脚本
-#     cp -f /scripts/jddj/jd_fruit.js /scripts/
-#     cp -f /scripts/jddj/jd_dreamFactory.js /scripts/
     for jsname in $(ls /scripts/jddj | grep -E "js$" | tr "\n" " "); do
         jsname_cn="$(grep "cron" /scripts/jddj/$jsname | grep -oE "/?/?tag\=.*" | cut -d"=" -f2)"
         jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
@@ -123,8 +120,8 @@ function diycron(){
     wget --no-check-certificate -O /scripts/jd_zjd_tuan.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd_tuan.js
     echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
-#     wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
-#     echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/lion-goose/BackUp/master/zcy01_jd_try.js
+    echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### moposmall https://github.com/moposmall/Script/tree/main/Me
     wget --no-check-certificate -O /scripts/moposmall_jx_cfd.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd.js
     echo "0 0,9,17 * * * node /scripts/moposmall_jx_cfd.js |ts >> /scripts/logs/moposmall_jx_cfd.log 2>&1" >> /scripts/docker/merged_list_file.sh
