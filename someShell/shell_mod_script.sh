@@ -32,6 +32,6 @@ fi
 rm -rf /scripts/zoo*
 for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do cp ${jsname} /scripts; done
 for jsname in $(find /scripts -name "zoo*.js"); do
-    jsnamecron="$(cat $jsname | grep -oE ".*cron.*" | cut -d:[ ] -f2)"
+    jsnamecron="$(cat $jsname | grep -oE ".*cron.*" | cut -d ":" -f2)"
     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$jsname >> /scripts/logs/$jsname.log 2>&1" >> /scripts/docker/merged_list_file.sh
 done
