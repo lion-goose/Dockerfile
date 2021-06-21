@@ -9,7 +9,7 @@ cp /jds/dd_scripts/genCodeConf.list "$GEN_CODE_LIST"
 echo "附加功能2，创建其他任务"
 echo "更新中青和百度任务文件夹"
 rm -rf /scripts/somescripts
-cp /data/somescripts/ /scripts/somescripts
+cp -r /data/somescripts /scripts/somescripts
 echo "创建其他定时任务"
 echo "# 百度和中青任务" >> $mergedListFile
 echo "*/30 5-23 * * * node /scripts/somescripts/youth/youth.js >> /scripts/logs/youth.log 2>&1" >> $mergedListFile
