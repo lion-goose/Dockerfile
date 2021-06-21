@@ -7,12 +7,9 @@ echo "附加功能1，使用jds仓库的genCodeConf.list文件"
 cp /jds/dd_scripts/genCodeConf.list "$GEN_CODE_LIST"
 
 echo "附加功能2，创建其他任务"
-if [ ! -d "/scripts/somescripts/" ]; then
-    echo "任务文件不存在，创建任务文件夹"
-    cp -r /data/somescripts/ /scripts/somescripts
-else
-    echo "任务存在，跳过..."
-fi
+echo "更新中青和百度任务文件夹"
+rm -rf /scripts/somescripts
+cp /data/somescripts/ /scripts/somescripts
 echo "创建其他定时任务"
 echo "# 百度和中青任务" >> $mergedListFile
 echo "*/30 5-23 * * * node /scripts/somescripts/youth/youth.js >> /scripts/logs/youth.log 2>&1" >> $mergedListFile
