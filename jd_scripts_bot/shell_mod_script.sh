@@ -137,7 +137,9 @@ function diycron(){
     #### star261 https://github.com/star261/jd/tree/main/scripts
     wget --no-check-certificate -O /scripts/jd_star_shop.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_star_shop.js
     wget --no-check-certificate -O /scripts/star_jd_jxmc.js https://raw.githubusercontent.com/star261/jd/main/scripts/jd_jxmc.js
-    echo "52 */4 * * * node /scripts/star_jd_jxmc.js |ts >> /scripts/logs/star_jd_jxmc 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "52 */4 * * * node /scripts/star_jd_jxmc.js |ts >> /scripts/logs/star_jd_jxmc.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/ddo_pk.js https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js
+    echo "28 0,6,13,19,21 * * * node /scripts/ddo_pk.js |ts >> /scripts/logs/ddo_pk.js.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
