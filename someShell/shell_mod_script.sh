@@ -32,3 +32,48 @@ for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do cp ${jsname} /scri
 #     jsnamecron="$(cat $jsname | grep -oE "/?/?cron.*" | cut -d ":" -f2)"
 #     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$jsname >> /scripts/logs/$jsname.log 2>&1" >> /scripts/docker/merged_list_file.sh
 # done
+
+echo "附加功能4，拉取@curtinlv的 JD-Script仓库的代码，并增加相关任务"
+if [ ! -d "/data/cust_repo/curtinlv/" ]; then
+    echo "未检查到@curtinlv的会员开卡仓库脚本，初始化下载相关脚本..."
+    git clone https://github.com/curtinlv/JD-Script.git /data/cust_repo/curtinlv
+else
+    echo "更新@curtinlv的会员开卡脚本相关文件..."
+    git -C /data/cust_repo/curtinlv reset --hard
+    git -C /data/cust_repo/curtinlv pull --rebase
+fi
+
+if type pip3 >/dev/null 2>&1; then
+    echo "会员开卡脚本需环境经存在，跳过安装依赖环境"
+    if [[ "$(pip3 list | grep Telethon)" == "" || "$(pip3 list | grep APScheduler)" == "" ]]; then
+        pip3 install requests
+    fi
+else
+    echo "会员开卡脚本需要python3环境，安装所需python3及依赖环境"
+    apk add --update python3-dev py3-pip
+    pip3 install requests
+fi
+echo "5 12,18 * * * cd /data/cust_repo/curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/data/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
+
+echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关任务"
+if [ ! -d "/data/cust_repo/JDDJ/" ]; then
+    echo "未检查到JDDJ仓库脚本，初始化下载相关脚本..."
+    git clone https://github.com/passerby-b/JDDJ.git /data/cust_repo/JDDJ
+else
+    echo "更新JDDJ脚本相关文件..."
+    git -C /data/cust_repo/JDDJ reset --hard
+    git -C /data/cust_repo/JDDJ pull --rebase
+fi
+
+if [ -n "$(ls /data/cust_repo/JDDJ/*_*.js)" ]; then
+    cp -f /data/cust_repo/JDDJ/*_*.js /scripts
+    cd /data/cust_repo/JDDJ/
+    for scriptFile in $(ls *_*.js | tr "\n" " "); do
+        if [[ -n "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $scriptFile)" && -z $1 ]]; then
+            cp $scriptFile /scripts
+            echo "#JDDJ仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >>$mergedListFile
+            echo "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $scriptFile) spnode /scripts/$scriptFile |ts >>/data/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1 &" >>$mergedListFile
+        fi
+    done
+fi
+
