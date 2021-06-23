@@ -59,32 +59,9 @@ fi
 echo "#curtinlv的关注有礼任务 " >>$mergedListFile
 echo "5 12,18 * * * cd /curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >> /scripts/logs/jd_getFollowGift.log 2>&1" >>$mergedListFile
 
-
-#和尚仓库脚本
-function initDust() {
-    git clone git@github.com:sensi-ribbed/Secretly-temple.git /monkcoder
-}
-
 #京东到家仓库脚本
 function initJddj() {
     git clone https://github.com/passerby-b/JDDJ.git /scripts/jddj
-}
-
-#### monk-coder https://github.com/monk-coder/dust
-function monkcoder(){
-    # https://github.com/monk-coder/dust
-    if [ ! -d "/monkcoder/" ]; then
-        echo "未检查到和尚仓库脚本，初始化下载相关脚本"
-        initDust
-    else
-        echo "更新和尚仓库脚本相关文件"
-        git -C /monkcoder reset --hard
-        git -C /monkcoder pull --rebase
-    fi
-    # 拷贝脚本
-    rm -rf /scripts/monkcoder_*
-    sed -i 's/40 9-18\/3/0 0/g' /monkcoder/normal/adolf_star.js
-    for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do cp ${jsname} /scripts/monkcoder_${jsname##*/}; done
 }
 
 #### JDDJ https://github.com/passerby-b/JDDJ
@@ -95,11 +72,6 @@ function jddj(){
 }
 
 function diycron(){
-    # monkcoder 定时任务
-    for jsname in $(find /monkcoder -name "*.js" | grep -vE "\/backup\/"); do
-        jsnamecron="$(cat $jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-        test -z "$jsnamecron" || echo "$jsnamecron node /scripts/monkcoder_${jsname##*/} >> /scripts/logs/monkcoder_${jsname##*/}.log 2>&1" >> /scripts/docker/merged_list_file.sh
-    done
     # JDDJ 定时任务
     # 添加农场和工厂文件
     cp -f /scripts/jdFruitShareCodes.js /scripts/jddj
