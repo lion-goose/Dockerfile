@@ -64,16 +64,15 @@ else
     git -C /data/cust_repo/JDDJ reset --hard
     git -C /data/cust_repo/JDDJ pull --rebase
 fi
-
-if [ -n "$(ls /data/cust_repo/JDDJ/*_*.js)" ]; then
-    cp -f /data/cust_repo/JDDJ/*_*.js /scripts
-    cd /data/cust_repo/JDDJ/
-    for scriptFile in $(ls *_*.js | tr "\n" " "); do
-        if [[ -n "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $scriptFile)" && -z $1 ]]; then
-            cp $scriptFile /scripts
-            echo "#JDDJ仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >>$mergedListFile
-            echo "$(sed -n "s/.*cronexpr=\"\(.*\)\".*/\1/p" $scriptFile) spnode /scripts/$scriptFile |ts >>/data/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1 &" >>$mergedListFile
-        fi
-    done
-fi
-
+rm -rf /scripts/jddj
+cp -rf /data/cust_repo/JDDJ /scripts/jddj
+cp -f /scripts/jdFruitShareCodes.js /scripts/jddj
+cp -f /scripts/jdDreamFactoryShareCodes.js /scripts/jddj
+for jsname in $(ls /scripts/jddj | grep -E "js$" | tr "\n" " "); do
+    jsname_cn="$(grep "cron" /scripts/jddj/$jsname | grep -oE "/?/?tag\=.*" | cut -d"=" -f2)"
+    jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
+    jsnamecron="$(cat /scripts/jddj/$jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
+    test -z "$jsname_cn" && jsname_cn=$jsname_log
+    test -z "$jsnamecron" || echo "# $jsname_cn" >> /scripts/docker/merged_list_file.sh
+    test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /scripts/logs/$jsname_log.log 2>&1" >> /scripts/docker/merged_list_file.sh
+done
