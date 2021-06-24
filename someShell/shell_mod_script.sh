@@ -28,10 +28,10 @@ else
 fi
 rm -rf /scripts/zoo*
 for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do cp ${jsname} /scripts; done
-for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do
-    jsnamecron="$(cat zooElecsport.js | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
-    test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$jsname >> /scripts/logs/$(echo $jsname | sed "s/.js/.log/g") 2>&1" >> /scripts/docker/merged_list_file.sh
-done
+# for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do
+#     jsnamecron="$(cat zooElecsport.js | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
+#     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$jsname >> /scripts/logs/$(echo $jsname | sed "s/.js/.log/g") 2>&1" >> /scripts/docker/merged_list_file.sh
+# done
 
 echo "附加功能4，拉取@curtinlv的 JD-Script仓库的代码，并增加相关任务"
 if [ ! -d "/data/cust_repo/curtinlv/" ]; then
