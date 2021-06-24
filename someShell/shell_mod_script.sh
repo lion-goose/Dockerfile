@@ -27,6 +27,8 @@ else
     git -C /data/cust_repo/zoo pull --rebase
 fi
 
+rm -rf /scripts/zoo*
+
 if [ -n "$(ls /data/cust_repo/zoo/zoo*.js)" ]; then
     cd /data/cust_repo/zoo/
     for scriptFile in $(ls zoo*.js | tr "\n" " "); do
