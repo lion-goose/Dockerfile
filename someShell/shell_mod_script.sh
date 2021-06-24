@@ -26,18 +26,8 @@ else
     git -C /data/cust_repo/zoo reset --hard
     git -C /data/cust_repo/zoo pull --rebase
 fi
-# rm -rf /scripts/zoo*
-# for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do cp ${jsname} /scripts; done
-# for jsname in $(ls /scripts | grep -E "zoo.*.js$" | tr "\n" " "); do
-#     if [[ -n "$(cat $jsname | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
-#         jsnamecron="$(cat $jsname | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
-#         echo "#Zoo仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $jsname)($jsname)" >> /scripts/docker/merged_list_file.sh
-#         test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$jsname >> /scripts/logs/$(echo $jsname | sed "s/.js/.log/g") 2>&1" >> /scripts/docker/merged_list_file.sh
-#     fi
-# done
 
 if [ -n "$(ls /data/cust_repo/zoo/zoo*.js)" ]; then
-#     cp -f /data/cust_repo/zoo/zoo*.js /scripts
     cd /data/cust_repo/zoo/
     for scriptFile in $(ls zoo*.js | tr "\n" " "); do
         if [[ -n "$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
@@ -48,8 +38,6 @@ if [ -n "$(ls /data/cust_repo/zoo/zoo*.js)" ]; then
         fi
     done
 fi
-
-
 
 
 echo "附加功能4，拉取@curtinlv的 JD-Script仓库的代码，并增加相关任务"
