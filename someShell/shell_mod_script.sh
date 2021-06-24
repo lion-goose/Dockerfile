@@ -28,8 +28,8 @@ else
 fi
 rm -rf /scripts/zoo*
 for jsname in $(find /data/cust_repo/zoo -name "zoo*.js"); do cp ${jsname} /scripts; done
-for jsname in $(ls /scripts | grep -E "zoo*.js$" | tr "\n" " "); do
-    jsnamecron="$(cat zooElecsport.js | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
+for jsname in $(ls /scripts | grep -E "zoo.*.js$" | tr "\n" " "); do
+    jsnamecron="$(cat $jsname | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
     echo "#Zoo仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $jsname)($jsname)" >> /scripts/docker/merged_list_file.sh
     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$jsname >> /scripts/logs/$(echo $jsname | sed "s/.js/.log/g") 2>&1" >> /scripts/docker/merged_list_file.sh
 done
