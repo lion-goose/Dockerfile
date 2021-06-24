@@ -44,7 +44,7 @@ if [ -n "$(ls /data/cust_repo/zoo/zoo*.js)" ]; then
             cp $scriptFile /scripts
             jsnamecron="$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
             echo "#Zoo仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >> $mergedListFile
-            test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$scriptFile >> /scripts/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1" >>$mergedListFile
+            test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$scriptFile >> /scripts/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1" >> $mergedListFile
         fi
     done
 fi
