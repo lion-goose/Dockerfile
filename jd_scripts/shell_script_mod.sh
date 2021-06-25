@@ -13,7 +13,7 @@ function JDHelloWorld() {
         git -C /JDHelloWorld pull --rebase
     fi
     ##复制文件
-    cp -f /JDHelloWorld/jd*.js /scripts/
+    cp -f /JDHelloWorld/*.js /scripts/
     
 }
 JDHelloWorld
