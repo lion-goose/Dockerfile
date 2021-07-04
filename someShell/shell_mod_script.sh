@@ -18,14 +18,14 @@ echo "45 6,9,12,15,18,21 * * * node /scripts/somescripts/youth/Youth_Read-hexor.
 echo "*/30 5-23 * * * node /scripts/somescripts/baidu/baidu_speed.js >> //scripts/logs/baidu_speed.log 2>&1" >> $mergedListFile
 
 echo "附加功能3，拉取zooPanda仓库的代码，并增加相关任务"
-if [ ! -d "/data/cust_repo/zoo/" ]; then
-    echo "未检查到zooPanda仓库脚本，初始化下载相关脚本..."
-    git clone https://github.com/zooPanda/zoo.git /data/cust_repo/zoo
-else
-    echo "更新zooPanda脚本相关文件..."
-    git -C /data/cust_repo/zoo reset --hard
-    git -C /data/cust_repo/zoo pull --rebase
-fi
+# if [ ! -d "/data/cust_repo/zoo/" ]; then
+#     echo "未检查到zooPanda仓库脚本，初始化下载相关脚本..."
+#     git clone https://github.com/zooPanda/zoo.git /data/cust_repo/zoo
+# else
+#     echo "更新zooPanda脚本相关文件..."
+#     git -C /data/cust_repo/zoo reset --hard
+#     git -C /data/cust_repo/zoo pull --rebase
+# fi
 
 rm -rf /scripts/zoo*
 
