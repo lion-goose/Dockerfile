@@ -85,3 +85,6 @@ for jsname in $(ls /scripts/jddj | grep -E "jddj_.*.js$" | tr "\n" " "); do
     test -z "$jsnamecron" || echo "# $jsname_cn" >> /scripts/docker/merged_list_file.sh
     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /scripts/logs/$jsname_log.log 2>&1" >> /scripts/docker/merged_list_file.sh
 done
+echo "5 13 * * * node /scripts/jddj/jd_fruit2.js |ts >> /scripts/logs/jd_fruit2.log 2>&1" >> $mergedListFile
+echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js |ts >> /scripts/logs/jd_dreamFactory2.log 2>&1" >> $mergedListFile
+echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js |ts >> /scripts/logs/jd_cfd2.log 2>&1" >> $mergedListFile
