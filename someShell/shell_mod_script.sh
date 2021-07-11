@@ -17,7 +17,7 @@ echo "15 5,8,11,14,17,20 * * * node /scripts/somescripts/youth/Youth_Read-ange.j
 echo "45 6,9,12,15,18,21 * * * node /scripts/somescripts/youth/Youth_Read-hexor.js >> /scripts/logs/Youth_Read-hexor.log 2>&1" >> $mergedListFile
 echo "*/30 5-23 * * * node /scripts/somescripts/baidu/baidu_speed.js >> //scripts/logs/baidu_speed.log 2>&1" >> $mergedListFile
 
-echo "附加功能3，拉取zooPanda仓库的代码，并增加相关任务"
+# echo "附加功能3，拉取zooPanda仓库的代码，并增加相关任务"
 # if [ ! -d "/data/cust_repo/zoo/" ]; then
 #     echo "未检查到zooPanda仓库脚本，初始化下载相关脚本..."
 #     git clone https://github.com/zooPanda/zoo.git /data/cust_repo/zoo
@@ -27,19 +27,19 @@ echo "附加功能3，拉取zooPanda仓库的代码，并增加相关任务"
 #     git -C /data/cust_repo/zoo pull --rebase
 # fi
 
-rm -rf /scripts/zoo*
+# rm -rf /scripts/zoo*
 
-if [ -n "$(ls /data/cust_repo/zoo/zoo*.js)" ]; then
-    cd /data/cust_repo/zoo/
-    for scriptFile in $(ls zoo*.js | tr "\n" " "); do
-        if [[ -n "$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
-            cp $scriptFile /scripts
-            jsnamecron="$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
-            echo "#Zoo仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >> $mergedListFile
-            test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$scriptFile >> /scripts/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1" >> $mergedListFile
-        fi
-    done
-fi
+# if [ -n "$(ls /data/cust_repo/zoo/zoo*.js)" ]; then
+#     cd /data/cust_repo/zoo/
+#     for scriptFile in $(ls zoo*.js | tr "\n" " "); do
+#         if [[ -n "$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
+#             cp $scriptFile /scripts
+#             jsnamecron="$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
+#             echo "#Zoo仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >> $mergedListFile
+#             test -z "$jsnamecron" || echo "$jsnamecron node /scripts/$scriptFile >> /scripts/logs/$(echo $scriptFile | sed "s/.js/.log/g") 2>&1" >> $mergedListFile
+#         fi
+#     done
+# fi
 
 
 echo "附加功能4，拉取@curtinlv的 JD-Script仓库的代码，并增加相关任务"
