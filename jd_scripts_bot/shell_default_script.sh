@@ -31,6 +31,8 @@ EOF
 
 chmod +x /usr/local/bin/spnode
 
+cp -f /scripts/logs/docker/* /scripts/docker/
+
 echo "第1步定义定时任务合并处理用到的文件路径..."
 defaultListFile="/scripts/docker/$DEFAULT_LIST_FILE"
 echo "└──默认文件定时任务文件路径为 ${defaultListFile}"
