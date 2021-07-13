@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+cp -f /scripts/logs/docker/* /scripts/docker/
+
 echo "定义定时任务合并处理用到的文件路径..."
 defaultListFile="/scripts/docker/$DEFAULT_LIST_FILE"
 echo "默认文件定时任务文件路径为 ${defaultListFile}"
