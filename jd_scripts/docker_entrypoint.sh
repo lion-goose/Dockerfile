@@ -14,7 +14,9 @@ else
   git remote set-url origin "$REPO_URL"
   git reset --hard
   echo "git pull拉取最新代码..."
-  git -C /scripts pull --rebase
+  git fetch --all
+  git reset --hard origin/master
+  git pull
   if [ ! -d /scripts/node_modules ]; then
     echo "容器首次启动，执行npm install..."
     npm install --loglevel error --prefix /scripts
