@@ -24,7 +24,6 @@ else
   git fetch --all
   git reset --hard origin/master
   git pull
-  cp /scripts/logs/docker/package.json /scripts/package.json
   if [ ! -d /scripts/node_modules ]; then
     echo "容器首次启动，执行npm install..."
     npm install --loglevel error --prefix /scripts
