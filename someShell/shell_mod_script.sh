@@ -88,3 +88,4 @@ done
 echo "5 13 * * * node /scripts/jddj/jd_fruit2.js >> /scripts/logs/jd_fruit2.log 2>&1" >> $mergedListFile
 echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js >> /scripts/logs/jd_dreamFactory2.log 2>&1" >> $mergedListFile
 echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js >> /scripts/logs/jd_cfd2.log 2>&1" >> $mergedListFile
+echo "28 6-23/2 * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1" >> $mergedListFile
