@@ -65,10 +65,10 @@ fi
 echo "#curtinlv的关注有礼任务 " >>$mergedListFile
 echo "5 12,18 * * * cd /data/cust_repo/curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/data/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
 
-echo "#curtinlv的赚京豆 " >>$mergedListFile
-echo "05 0,7,23 * * * cd /data/cust_repo/curtinlv && python3 jd_zjd.py |ts >>/data/logs/jd_zjd.log 2>&1 &" >>$mergedListFile
+echo "#curtinlv抢京豆" >>$mergedListFile
+echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_qjd.py |ts >>/data/logs/jd_qjd.log 2>&1 &" >>$mergedListFile
 
-echo "#curtinlv签到领陷阱 " >>$mergedListFile
+echo "#curtinlv签到领现金 " >>$mergedListFile
 echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_cashHelp.py |ts >>/data/logs/jd_cashHelp.log 2>&1 &" >>$mergedListFile
 
 echo "#curtinlv的全民抢京豆 " >>$mergedListFile
