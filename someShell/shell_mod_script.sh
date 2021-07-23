@@ -104,9 +104,6 @@ sed -i "/coinToBeans =/s/''/'万能的京豆'/g" /data/cust_repo/curtinlv/jd_blu
 sed -i "/blueCoin_Cc = /s/False/True/g" /data/cust_repo/curtinlv/jd_blueCoin.py
 echo "59 23 * * * cd /data/cust_repo/curtinlv && python3 jd_blueCoin.py |ts >>/data/logs/jd_blueCoinPy.log 2>&1 &" >>$mergedListFile
 
-echo "#curtinlv的会员开卡仓库任务 " >>$mergedListFile
-echo "2 8,15 * * * cd /data/cust_repo/curtinlv/OpenCard && python3 jd_OpenCard.py |ts >>/data/logs/jd_OpenCard.log 2>&1 &" >>$mergedListFile
-
 echo "#curtinlv的关注有礼任务 " >>$mergedListFile
 cat /data/cookies.list >/data/cust_repo/curtinlv/getFollowGifts/JDCookies.txt
 echo "15 8,15 * * * cd /data/cust_repo/curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/data/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
