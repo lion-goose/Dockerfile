@@ -34,6 +34,7 @@ fi
 
 ##复制两个文件
 cp -f /lion-goose/jd*.js /scripts/
+cp -f /lion-goose/xmSports.js /scripts/
 
 
 function diycron(){
