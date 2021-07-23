@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ -d "/data/forwardBot/" ]; then
+    cd /data/forwardBot/
+    sh start.sh
+fi
 
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
