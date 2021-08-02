@@ -102,7 +102,7 @@ echo "#curtinlv抢京豆" >>$mergedListFile
 echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_qjd.py |ts >>/data/logs/jd_qjd.log 2>&1 &" >>$mergedListFile
 
 echo "#curtinlv东东超市兑换" >>$mergedListFile
-sed -i "/coinToBeans =/s/''/'京豆包'/g" /data/cust_repo/curtinlv/jd_blueCoin.py
+sed -i "/coinToBeans =/s/''/'万能的京豆'/g" /data/cust_repo/curtinlv/jd_blueCoin.py
 sed -i "/blueCoin_Cc = /s/False/True/g" /data/cust_repo/curtinlv/jd_blueCoin.py
 echo "59 23 * * * cd /data/cust_repo/curtinlv && python3 jd_blueCoin.py |ts >>/data/logs/jd_blueCoinPy.log 2>&1 &" >>$mergedListFile
 
