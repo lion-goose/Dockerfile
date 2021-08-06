@@ -18,7 +18,9 @@ echo "创建其他定时任务"
 echo "# 百度和中青任务" >> $mergedListFile
 echo "*/30 5-23 * * * node /scripts/somescripts/youth/youth.js >> /scripts/logs/youth.log 2>&1" >> $mergedListFile
 echo "15 5,10,15,19,22 * * * node /scripts/somescripts/youth/Youth_Read-ange.js >> /scripts/logs/Youth_Read-ange.log 2>&1" >> $mergedListFile
+echo "38 11 * * * node /scripts/somescripts/youth/youth_gain-ange.js >> /scripts/logs/youth_gain-ange.log 2>&1" >> $mergedListFile
 echo "45 6,11,16,19,23 * * * node /scripts/somescripts/youth/Youth_Read-hexor.js >> /scripts/logs/Youth_Read-hexor.log 2>&1" >> $mergedListFile
+echo "28 12 * * * node /scripts/somescripts/youth/youth_gain-hexor.js >> /scripts/logs/youth_gain-hexor.log 2>&1" >> $mergedListFile
 echo "*/30 5-23 * * * node /scripts/somescripts/baidu/baidu_speed.js >> //scripts/logs/baidu_speed.log 2>&1" >> $mergedListFile
 
 # echo "附加功能3，拉取zooPanda仓库的代码，并增加相关任务"
