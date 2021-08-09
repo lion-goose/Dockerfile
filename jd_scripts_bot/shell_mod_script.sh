@@ -45,9 +45,9 @@ rm -rf /scripts/he1pu*
 if [ -n "$(ls /JDHelp/*.js)" ]; then
     cd /JDHelp/
     for scriptFile in $(ls *.js | tr "\n" " "); do
-        if [[ -n "$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
+        if [[ -n "$(cat $scriptFile | grep -oE "cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
             cp ${scriptFile} /scripts/he1pu_${scriptFile##*/}
-            jsnamecron="$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
+            jsnamecron="$(cat $scriptFile | grep -oE "cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
             echo "#he1pu/JDHelp仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >> $mergedListFile
             test -z "$jsnamecron" || echo "$jsnamecron node /scripts/he1pu_${scriptFile##*/} >> /scripts/logs/$(echo he1pu_${scriptFile##*/} | sed "s/.js/.log/g") 2>&1" >> $mergedListFile
         fi
