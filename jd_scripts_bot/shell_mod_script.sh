@@ -62,7 +62,7 @@ function diycron(){
     echo "15 3,11,19 * * * node /scripts/moposmall_jx_mc_emptycabbage.js |ts >> /scripts/logs/moposmall_jx_mc_emptycabbage.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### he1pu https://github.com/he1pu/JDHelp
     wget --no-check-certificate -O /scripts/he1pu_jd_cfdtx.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_cfdtx.js
-    echo "0 0,12 * * * node /scripts/he1pu_jd_cfdtx.js |ts >> /scripts/logs/he1pu_jd_cfdtx.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "0 0,12 * * * 59 11,23 * * * sleep 57s; node /scripts/he1pu_jd_cfdtx.js |ts >> /scripts/logs/he1pu_jd_cfdtx.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/he1pu_jd_joy_park.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_joy_park.js
     echo "20 0-23/3 * * * node /scripts/he1pu_jd_joy_park.js |ts >> /scripts/logs/he1pu_jd_joy_park.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/he1pu_jd_joypark_open.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_joypark_open.js
