@@ -81,6 +81,8 @@ function diycron(){
     #### he1pu https://github.com/he1pu/JDHelp
     wget --no-check-certificate -O /scripts/he1p_jd_cfdtx.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_cfdtx.js
     echo "59 11,23 * * * sleep 57s; node /scripts/he1p_jd_cfdtx.js |ts >> /scripts/logs/he1p_jd_cfdtx.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/he1p_jd_dpqd.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_dpqd.js
+    echo "2 0 * * * sleep 57s; node /scripts/he1p_jd_dpqd.js |ts >> /scripts/logs/he1p_jd_dpqd.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
