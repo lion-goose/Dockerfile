@@ -60,6 +60,15 @@ function diycron(){
     echo "10 */4 * * * node /scripts/moposmall_jx_mc_coin.js |ts >> /scripts/logs/moposmall_jx_mc_coin.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/moposmall_jx_mc_emptycabbage.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_emptycabbage.js
     echo "15 3,11,19 * * * node /scripts/moposmall_jx_mc_emptycabbage.js |ts >> /scripts/logs/moposmall_jx_mc_emptycabbage.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    #### he1pu https://github.com/he1pu/JDHelp
+    wget --no-check-certificate -O /scripts/he1pu_jd_cfdtx.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_cfdtx.js
+    echo "0 0,12 * * * node /scripts/he1pu_jd_cfdtx.js |ts >> /scripts/logs/he1pu_jd_cfdtx.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/he1pu_jd_joy_park.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_joy_park.js
+    echo "20 0-23/3 * * * node /scripts/he1pu_jd_joy_park.js |ts >> /scripts/logs/he1pu_jd_joy_park.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/he1pu_jd_joypark_open.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_joypark_open.js
+    echo "20 9 * * * node /scripts/he1pu_jd_joypark_open.js |ts >> /scripts/logs/he1pu_jd_joypark_open.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    wget --no-check-certificate -O /scripts/he1pu_jd_joypark_task.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_joypark_task.js
+    echo "20 7,9,17,20 node /scripts/he1pu_jd_joypark_task.js |ts >> /scripts/logs/he1pu_jd_joypark_task.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
