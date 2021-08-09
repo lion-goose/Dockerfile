@@ -2,6 +2,7 @@
 set -e
 
 
+
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
 sed -i 's/COOKIES_LIST/COOKIE_LIST/g' /scripts/docker/auto_help.sh
