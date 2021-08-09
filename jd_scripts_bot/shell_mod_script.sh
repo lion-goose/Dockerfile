@@ -30,6 +30,7 @@ cp -f /lion-goose/jd*.js /scripts/
 cp -f /lion-goose/xmSports.js /scripts/
 
 echo "附加功能3，拉取he1pu/JDHelp仓库的代码，并增加相关任务"
+apk add grep
 if [ ! -d "/JDHelp/" ]; then
     echo "未检查到he1pu/JDHelp仓库脚本，初始化下载相关脚本..."
     git clone https://github.com/he1pu/JDHelp.git /JDHelp
