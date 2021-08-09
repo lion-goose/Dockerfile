@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-if [ ! -f "/root/.ssh/id_rsa" ]; then
-    echo "未检查到仓库密钥，复制密钥"
-    cp /scripts/logs/id_rsa /root/.ssh/id_rsa
-    chmod 600 /root/.ssh/id_rsa
-    ssh-keyscan github.com > /root/.ssh/known_hosts
-fi
-
 
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
@@ -35,6 +28,30 @@ fi
 ##复制两个文件
 cp -f /lion-goose/jd*.js /scripts/
 cp -f /lion-goose/xmSports.js /scripts/
+
+echo "附加功能3，拉取he1pu/JDHelp仓库的代码，并增加相关任务"
+if [ ! -d "/JDHelp/" ]; then
+    echo "未检查到he1pu/JDHelp仓库脚本，初始化下载相关脚本..."
+    git clone https://github.com/he1pu/JDHelp.git /JDHelp
+else
+    echo "更新he1pu/JDHelp脚本相关文件..."
+    git -C /JDHelp reset --hard
+    git -C /JDHelp pull --rebase
+fi
+
+rm -rf /scripts/he1pu*
+
+if [ -n "$(ls /JDHelp/*.js)" ]; then
+    cd /JDHelp/
+    for scriptFile in $(ls *.js | tr "\n" " "); do
+        if [[ -n "$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')" ]]; then
+            cp ${scriptFile} /scripts/he1pu_${scriptFile##*/}
+            jsnamecron="$(cat $scriptFile | grep -oE "/?/?cron.{,50}$" | awk -F[\ ] '{print $2,$3,$4,$5,$6}')"
+            echo "#he1pu/JDHelp仓库任务-$(sed -n "s/.*new Env('\(.*\)').*/\1/p" $scriptFile)($scriptFile)" >> $mergedListFile
+            test -z "$jsnamecron" || echo "$jsnamecron node /scripts/he1pu_${jsname##*/} >> /scripts/logs/$(echo he1pu_${jsname##*/} | sed "s/.js/.log/g") 2>&1" >> $mergedListFile
+        fi
+    done
+fi
 
 
 function diycron(){
