@@ -143,3 +143,5 @@ echo "57 7,15,23 * * * node /scripts/jd_task_validate_init.js >> /scripts/logs/j
 echo "58 7,15,23 * * * sleep 7s; node conc /scripts/jd_task_validate.js >> /scripts/logs/jd_task_validate.log 2>&1" >>$mergedListFile
 echo "59 7,15,23 * * * sleep 57s; node conc /scripts/jd_joy_reward_new.js >> /scripts/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
 echo "0 0,8,16 * * * node conc /scripts/jd_joy_reward_new.js >> /scripts/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
+echo "#E5AutoApi调用任务 " >>$mergedListFile
+echo "12 */6 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
