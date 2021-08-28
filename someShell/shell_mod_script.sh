@@ -100,17 +100,17 @@ sed -i "/TG_USER_ID =/s/= \(.*\)/= $TG_USER_ID/g" /data/cust_repo/curtinlv/OpenC
 # echo "#curtinlv的赚京豆 " >>$mergedListFile
 # echo "05 0,7,23 * * * cd /data/cust_repo/curtinlv && python3 jd_zjd.py |ts >>/data/logs/jd_zjd.log 2>&1 &" >>$mergedListFile
 
-echo "#curtinlv抢京豆" >>$mergedListFile
-echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_qjd.py |ts >>/data/logs/jd_qjd.log 2>&1 &" >>$mergedListFile
+# echo "#curtinlv抢京豆" >>$mergedListFile
+# echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_qjd.py |ts >>/data/logs/jd_qjd.log 2>&1 &" >>$mergedListFile
 
 echo "#curtinlv东东超市兑换" >>$mergedListFile
 sed -i "/coinToBeans =/s/''/'京豆包'/g" /data/cust_repo/curtinlv/jd_blueCoin.py
 sed -i "/blueCoin_Cc = /s/False/True/g" /data/cust_repo/curtinlv/jd_blueCoin.py
 echo "59 23 * * * cd /data/cust_repo/curtinlv && python3 jd_blueCoin.py |ts >>/data/logs/jd_blueCoinPy.log 2>&1 &" >>$mergedListFile
 
-echo "#curtinlv的关注有礼任务 " >>$mergedListFile
-cat /data/cookies.list >/data/cust_repo/curtinlv/getFollowGifts/JDCookies.txt
-echo "15 8,15 * * * cd /data/cust_repo/curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/data/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
+# echo "#curtinlv的关注有礼任务 " >>$mergedListFile
+# cat /data/cookies.list >/data/cust_repo/curtinlv/getFollowGifts/JDCookies.txt
+# echo "15 8,15 * * * cd /data/cust_repo/curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/data/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
 
 
 echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关任务"
