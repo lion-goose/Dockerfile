@@ -70,8 +70,6 @@ function diycron(){
     wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/lion-goose/BackUp/master/zcy01_jd_try.js
     echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### moposmall https://github.com/moposmall/Script/tree/main/Me
-    wget --no-check-certificate -O /scripts/moposmall_jx_cfd.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_cfd.js
-    echo "0 0,9,17 * * * node /scripts/moposmall_jx_cfd.js |ts >> /scripts/logs/moposmall_jx_cfd.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/moposmall_jx_mc.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js
     echo "5 2,10,18 * * * node /scripts/moposmall_jx_mc.js |ts >> /scripts/logs/moposmall_jx_mc.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/moposmall_jx_mc_coin.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_coin.js
@@ -79,8 +77,6 @@ function diycron(){
     wget --no-check-certificate -O /scripts/moposmall_jx_mc_emptycabbage.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc_emptycabbage.js
     echo "15 3,11,19 * * * node /scripts/moposmall_jx_mc_emptycabbage.js |ts >> /scripts/logs/moposmall_jx_mc_emptycabbage.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### he1pu https://github.com/he1pu/JDHelp
-    wget --no-check-certificate -O /scripts/he1p_jd_cfdtx.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_cfdtx.js
-    echo "59 11,23 * * * sleep 57s; node /scripts/he1p_jd_cfdtx.js |ts >> /scripts/logs/he1p_jd_cfdtx.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/he1p_jd_dpqd.js https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_dpqd.js
     echo "2 0 * * * node /scripts/he1p_jd_dpqd.js |ts >> /scripts/logs/he1p_jd_dpqd.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
