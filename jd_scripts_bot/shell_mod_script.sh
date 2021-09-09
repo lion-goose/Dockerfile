@@ -81,7 +81,7 @@ function diycron(){
     echo "2 0 * * * node /scripts/he1p_jd_dpqd.js |ts >> /scripts/logs/he1p_jd_dpqd.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### X1a0He https://github.com/X1a0He/jd_scripts_fixed
     wget --no-check-certificate -O /scripts/jd_car_exchange_xh.js https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_car_exchange_xh.js
-    echo "0 0 * * * node /scripts/jd_car_exchange_xh.js |ts >> /scripts/logs/jd_car_exchange_xh.log 2>&1" >> /scripts/docker/merged_list_file.sh
+    echo "0,1 0 * * * node /scripts/jd_car_exchange_xh.js |ts >> /scripts/logs/jd_car_exchange_xh.log 2>&1" >> /scripts/docker/merged_list_file.sh
 }
 
 
