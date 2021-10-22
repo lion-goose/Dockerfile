@@ -139,9 +139,9 @@ echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js >> /scripts/logs/jd_dre
 echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js >> /scripts/logs/jd_cfd2.log 2>&1" >> $mergedListFile
 
 echo "#宠汪汪积分兑换京豆组合 " >>$mergedListFile
-echo "57 7,15,23 * * * node /scripts/jd_task_validate_init.js >> /scripts/logs/jd_task_validate_init.log 2>&1" >>$mergedListFile
-echo "58 7,15,23 * * * sleep 7s; node conc /scripts/jd_task_validate.js >> /scripts/logs/jd_task_validate.log 2>&1" >>$mergedListFile
+echo "47,57 7,15,16,23 * * * node /scripts/jd_task_validate_init.js >> /scripts/logs/jd_task_validate_init.log 2>&1" >>$mergedListFile
+echo "47,58 7,15,16,23 * * * sleep 2s; node conc /scripts/jd_task_validate.js >> /scripts/logs/jd_task_validate.log 2>&1" >>$mergedListFile
 echo "59 7,15,23 * * * sleep 57s; node conc /scripts/jd_joy_reward_new.js >> /scripts/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
-echo "0 0,8,16 * * * node conc /scripts/jd_joy_reward_new.js >> /scripts/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
+echo "0,48 0,8,16 * * * node conc /scripts/jd_joy_reward_new.js >> /scripts/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
 echo "#E5AutoApi调用任务 " >>$mergedListFile
 echo "25 */6 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
