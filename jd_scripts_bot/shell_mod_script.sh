@@ -60,15 +60,13 @@ function diycron(){
     wget --no-check-certificate -O /scripts/jd_lottery_machine.js https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js
     echo "1 0,16,22 * * * node /scripts/jd_lottery_machine.js |ts >> /scripts/logs/jd_lottery_machine.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### whyour https://github.com/whyour/hundun
-    wget --no-check-certificate -O /scripts/whyour_jx_nc.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js
-    echo "0 2,9 * * * node /scripts/whyour_jx_nc.js |ts >> /scripts/logs/whyour_jx_nc.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/whyour_jx_factory.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js
     echo "13 */4 * * * node /scripts/whyour_jx_factory.js |ts >> /scripts/logs/whyour_jx_factory.log 2>&1" >> /scripts/docker/merged_list_file.sh
     wget --no-check-certificate -O /scripts/jd_zjd_tuan.js https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd_tuan.js
     echo "4 * * * * node /scripts/jd_zjd_tuan.js |ts >> /scripts/logs/jd_zjd_tuan.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js
-    wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/lion-goose/BackUp/master/zcy01_jd_try.js
-    echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
+#     wget --no-check-certificate -O /scripts/zcy01_jd_try.js https://raw.githubusercontent.com/lion-goose/BackUp/master/zcy01_jd_try.js
+#     echo "55 15 */2 * * node /scripts/zcy01_jd_try.js |ts >> /scripts/logs/zcy01_jd_try.log 2>&1" >> /scripts/docker/merged_list_file.sh
     #### moposmall https://github.com/moposmall/Script/tree/main/Me
     wget --no-check-certificate -O /scripts/moposmall_jx_mc.js https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js
     echo "5 2,10,18 * * * node /scripts/moposmall_jx_mc.js |ts >> /scripts/logs/moposmall_jx_mc.log 2>&1" >> /scripts/docker/merged_list_file.sh
