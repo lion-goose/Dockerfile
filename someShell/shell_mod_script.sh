@@ -139,6 +139,16 @@ echo "5 13 * * * node /scripts/jddj/jd_fruit2.js >> /scripts/logs/jd_fruit2.log 
 echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js >> /scripts/logs/jd_dreamFactory2.log 2>&1" >> $mergedListFile
 echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js >> /scripts/logs/jd_cfd2.log 2>&1" >> $mergedListFile
 
+echo "附加功能6，拉取@leeyiding的seresCheckin仓库的代码，并增加相关任务"
+if [ ! -d "/data/cust_repo/seresCheckin/" ]; then
+    echo "未检查到seresCheckin的会员开卡仓库脚本，初始化下载相关脚本..."
+    git clone https://github.com/leeyiding/seresCheckin.git /data/cust_repo/seresCheckin
+else
+    echo "更新seresCheckin的会员开卡脚本相关文件..."
+    git -C /data/cust_repo/curtinlv reset --hard
+    git -C /data/cust_repo/curtinlv pull --rebase
+fi
+
 echo "#宠汪汪积分兑换京豆组合 " >>$mergedListFile
 echo "47,57 7,15,16,23 * * * node /scripts/jd_task_validate_init.js >> /scripts/logs/jd_task_validate_init.log 2>&1" >>$mergedListFile
 echo "47,58 7,15,16,23 * * * sleep 2s; node conc /scripts/jd_task_validate.js >> /scripts/logs/jd_task_validate.log 2>&1" >>$mergedListFile
