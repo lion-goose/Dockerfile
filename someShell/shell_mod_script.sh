@@ -163,4 +163,4 @@ echo "39 10,22 * * * node /scripts/jd_1111xdz.js >> /scripts/logs/jd_1111xdz.log
 echo "#美团限时红包" >>$mergedListFile
 echo "0 11,14,17,21,0,1,2,3 * * * cd /data/custom_scripts && python3 meituan.py |ts >>/data/logs/meituan.log 2>&1 &" >>$mergedListFile
 echo "#seresCheckin任务" >>$mergedListFile
-echo "0 3 * * * cd /data/cust_repo/seresCheckin && python3 main.py
+echo "48 6 * * * cd /data/cust_repo/seresCheckin && python3 main.py
