@@ -145,8 +145,8 @@ if [ ! -d "/data/cust_repo/seresCheckin/" ]; then
     git clone https://github.com/leeyiding/seresCheckin.git /data/cust_repo/seresCheckin
 else
     echo "更新seresCheckin的会员开卡脚本相关文件..."
-    git -C /data/cust_repo/curtinlv reset --hard
-    git -C /data/cust_repo/curtinlv pull --rebase
+    git -C /data/cust_repo/seresCheckin reset --hard
+    git -C /data/cust_repo/seresCheckin pull --rebase
 fi
 
 echo "#宠汪汪积分兑换京豆组合 " >>$mergedListFile
