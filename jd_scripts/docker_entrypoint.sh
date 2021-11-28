@@ -37,6 +37,13 @@ echo "------------------------------------------------执行定时任务任务sh
 sh /jds/jd_scripts/task_shell_script.sh
 echo "--------------------------------------------------默认定时任务执行完成---------------------------------------------------"
 
+if [[ "${before_package_json}" != "$(cat /scripts/package.json)" ]]; then
+  echo "package.json有更新，执行npm install..."
+  npm install --loglevel error --prefix /scripts
+else
+  echo "package.json无变化，跳过npm install..."
+fi
+
 if [ $run_cmd ]; then
     echo "Start crontab task main process..."
     echo "启动crondtab定时任务主进程..."
