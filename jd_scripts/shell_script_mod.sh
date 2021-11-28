@@ -4,7 +4,7 @@ set -e
 mergedListFile="/scripts/docker/merged_list_file.sh"
 
 echo "附加功能1，backup仓库脚本"
-#@shylocks仓库脚本
+
 function initLiongoose() {
     git clone https://github.com/lion-goose/BackUp.git /lion-goose
 }
