@@ -22,6 +22,7 @@ fi
 ##复制两个文件
 cp -f /lion-goose/jd*.js /scripts/
 cp -f /lion-goose/TS_USER_AGENTS.js /scripts/
+cp -f /lion-goose/package.json /scripts/
 cp -f /lion-goose/xmSports.js /scripts/
 echo "18 */6 * * * node /scripts/jd_api_test.js |ts >> /scripts/logs/jd_api_test.log 2>&1" >> /scripts/docker/merged_list_file.sh
 
