@@ -39,6 +39,7 @@ function JDHelloWorld() {
     fi
     ##复制文件
     cp -f /JDHelloWorld/*.js /scripts/
+    cp -f /JDHelloWorld/*.ts /scripts/
     
 }
 JDHelloWorld
