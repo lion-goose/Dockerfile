@@ -42,6 +42,7 @@ function JDHelloWorld() {
     fi
     ##复制文件
     cp -f /JDHelloWorld/*.js /scripts/
+    echo "18 */4 * * * node /scripts/jd_dreamFactory_help.js |ts >> /scripts/logs/jd_dreamFactory_help.log 2>&1" >> /scripts/docker/merged_list_file.sh
     
 }
 JDHelloWorld
