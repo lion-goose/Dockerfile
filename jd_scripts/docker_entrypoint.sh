@@ -40,6 +40,7 @@ echo "--------------------------------------------------默认定时任务执行
 if [[ "${before_package_json}" != "$(cat /scripts/package.json)" ]]; then
   echo "package.json有更新，执行npm install..."
   npm install --loglevel error --prefix /scripts
+  before_package_json=$(cat /scripts/package.json)
 else
   echo "package.json无变化，跳过npm install..."
 fi
