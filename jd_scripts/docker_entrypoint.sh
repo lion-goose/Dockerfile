@@ -5,7 +5,7 @@ set -e
 if [ $1 ]; then
     run_cmd=$1
 fi
-# [ -f /scripts/package.json ] && before_package_json=$(cat /scripts/package.json)
+[ -f /scripts/package.json ] && before_package_json=$(cat /scripts/package.json)
 if [ -f "/scripts/logs/pull.lock" ]; then
   echo "存在更新锁定文件，跳过git pull操作..."
 else
@@ -37,7 +37,6 @@ echo "------------------------------------------------执行定时任务任务sh
 sh /jds/jd_scripts/task_shell_script.sh
 echo "--------------------------------------------------默认定时任务执行完成---------------------------------------------------"
 
-[ -f /scripts/package.json ] && before_package_json=$(cat /scripts/package.json)
 if [[ "${before_package_json}" != "$(cat /scripts/package.json)" ]]; then
   echo "package.json有更新，执行npm install..."
   npm install --loglevel error --prefix /scripts
