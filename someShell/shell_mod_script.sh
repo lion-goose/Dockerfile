@@ -131,7 +131,7 @@ for jsname in $(ls /scripts/jddj | grep -E "jddj_.*.js$" | tr "\n" " "); do
     jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
     jsnamecron="$(cat /scripts/jddj/$jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
     test -z "$jsname_cn" && jsname_cn=$jsname_log
-    test -z "$jsnamecron" || echo "# $jsname_cn" >> /scripts/docker/merged_list_file.sh
+    test -z "$jsnamecron" || echo "# $jsname_cn" >> $mergedListFile
     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /scripts/logs/$jsname_log.log 2>&1" >> $mergedListFile
 done
 echo "15 12 * * * node /scripts/jddj/jddj_fruit.js >> /scripts/logs/jddj_fruit.log 2>&1" >> $mergedListFile
