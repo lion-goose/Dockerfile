@@ -169,4 +169,4 @@ echo "#seresCheckin任务" >>$mergedListFile
 echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
 echo "#bot重启" >>$mergedListFile
 echo "56 23 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
-echo "57 23 * * * sh /data/liby_forward/liby_start.sh  restart" >>$mergedListFile
+echo "57 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
