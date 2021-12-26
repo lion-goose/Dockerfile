@@ -20,13 +20,12 @@ echo "更新中青和百度任务文件夹"
 rm -rf /scripts/somescripts
 cp -r /data/somescripts /scripts/somescripts
 echo "创建其他定时任务"
-echo "# 百度和中青任务" >> $mergedListFile
+echo "# 中青任务" >> $mergedListFile
 echo "*/30 5-23 * * * node /scripts/somescripts/youth/youth.js >> /data/logs/youth.log 2>&1" >> $mergedListFile
 echo "15 5,10,15,19,22 * * * node /scripts/somescripts/youth/Youth_Read-ange.js >> /data/logs/Youth_Read-ange.log 2>&1" >> $mergedListFile
 echo "38 9 * * * node /scripts/somescripts/youth/youth_gain-ange.js >> /data/logs/youth_gain-ange.log 2>&1" >> $mergedListFile
 echo "45 6,11,16,19,23 * * * node /scripts/somescripts/youth/Youth_Read-hexor.js >> /data/logs/Youth_Read-hexor.log 2>&1" >> $mergedListFile
 echo "28 10 * * * node /scripts/somescripts/youth/youth_gain-hexor.js >> /data/logs/youth_gain-hexor.log 2>&1" >> $mergedListFile
-echo "*/30 5-23 * * * node /scripts/somescripts/baidu/baidu_speed.js >> //data/logs/baidu_speed.log 2>&1" >> $mergedListFile
 
 # echo "附加功能3，拉取zooPanda仓库的代码，并增加相关任务"
 # if [ ! -d "/data/cust_repo/zoo/" ]; then
