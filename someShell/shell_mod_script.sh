@@ -171,5 +171,4 @@ echo "56 23 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
 echo "57 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
 echo "58 23 * * * sh /data/sun_forward/sun_start.sh restart" >>$mergedListFile
 echo "#刷新cookie" >>$mergedListFile
-echo "0 */8 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
-
+echo "0 */8 * * * ddBot -up renewCookie" >>$mergedListFile
