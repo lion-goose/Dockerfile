@@ -10,6 +10,11 @@ if [ -d "/data/liby_forward/" ]; then
     sh liby_start.sh
 fi
 
+if [ -d "/data/sun_forward/" ]; then
+    cd /data/sun_forward/
+    sh sun_start.sh
+fi
+
 mergedListFile="/scripts/merged_list_file.sh"
 
 echo "附加功能1，使用jds仓库的genCodeConf.list文件"
