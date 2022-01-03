@@ -172,8 +172,8 @@ echo "0 11,14,17,21,0,1,2,3 * * * cd /data/custom_scripts && python3 meituan.py 
 echo "#seresCheckin任务" >>$mergedListFile
 echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
 echo "#bot重启" >>$mergedListFile
-echo "56 23 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
-echo "57 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
-echo "58 23 * * * sh /data/sun_forward/sun_start.sh restart" >>$mergedListFile
+echo "57 23 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
+echo "58 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
+echo "59 23 * * * sh /data/sun_forward/sun_start.sh restart" >>$mergedListFile
 echo "#刷新cookie" >>$mergedListFile
 echo "0 */8 * * * ddBot -up renewCookie" >>$mergedListFile
