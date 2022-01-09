@@ -112,6 +112,9 @@ sed -i "/TG_USER_ID =/s/= \(.*\)/= $TG_USER_ID/g" /data/cust_repo/curtinlv/OpenC
 # echo "#curtinlv抢京豆" >>$mergedListFile
 echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_qjd.py |ts >>/data/logs/jd_qjd.log 2>&1 &" >>$mergedListFile
 
+# echo "#城城分现金内部助力" >>$mergedListFile
+echo "0 0 9-21 * * cd /data/cust_repo/curtinlv && python3 jd_ccfxj_help.py |ts >>/data/logs/jd_ccfxj_help.log 2>&1 &" >>$mergedListFile
+
 echo "#curtinlv东东超市兑换" >>$mergedListFile
 sed -i "/coinToBeans =/s/''/'京豆包'/g" /data/cust_repo/curtinlv/jd_blueCoin.py
 sed -i "/blueCoin_Cc = /s/False/True/g" /data/cust_repo/curtinlv/jd_blueCoin.py
