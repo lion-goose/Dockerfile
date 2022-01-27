@@ -10,10 +10,10 @@ if [ -d "/data/liby_forward/" ]; then
     sh liby_start.sh
 fi
 
-if [ -d "/data/sun_forward/" ]; then
-    cd /data/sun_forward/
-    sh sun_start.sh
-fi
+#if [ -d "/data/sun_forward/" ]; then
+#    cd /data/sun_forward/
+#    sh sun_start.sh
+#fi
 
 mergedListFile="/scripts/merged_list_file.sh"
 
