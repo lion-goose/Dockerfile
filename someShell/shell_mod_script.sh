@@ -20,6 +20,13 @@ mergedListFile="/scripts/merged_list_file.sh"
 echo "附加功能1，使用jds仓库的genCodeConf.list文件"
 cp /jds/dd_scripts/genCodeConf.list "$GEN_CODE_LIST"
 
+echo "#bot重启" >>$mergedListFile
+echo "55 23 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
+echo "56 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
+#echo "57 23 * * * sh /data/sun_forward/sun_start.sh restart" >>$mergedListFile
+echo "#刷新cookie" >>$mergedListFile
+echo "0 */8 * * * ddBot -up renewCookie" >>$mergedListFile
+
 echo "附加功能2，创建其他任务"
 echo "更新中青和百度任务文件夹"
 rm -rf /scripts/somescripts
@@ -174,9 +181,3 @@ echo "#美团限时红包" >>$mergedListFile
 echo "0 11,14,17,21,0,1,2,3 * * * cd /data/custom_scripts && python3 meituan.py |ts >>/data/logs/meituan.log 2>&1 &" >>$mergedListFile
 echo "#seresCheckin任务" >>$mergedListFile
 echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
-echo "#bot重启" >>$mergedListFile
-echo "55 23 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
-echo "56 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
-#echo "57 23 * * * sh /data/sun_forward/sun_start.sh restart" >>$mergedListFile
-echo "#刷新cookie" >>$mergedListFile
-echo "0 */8 * * * ddBot -up renewCookie" >>$mergedListFile
