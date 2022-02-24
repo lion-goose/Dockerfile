@@ -126,14 +126,14 @@ echo "59 23 * * * cd /data/cust_repo/curtinlv && python3 jd_blueCoin.py |ts >>/d
 
 
 echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关任务"
-if [ ! -d "/data/cust_repo/JDDJ/" ]; then
-    echo "未检查到JDDJ仓库脚本，初始化下载相关脚本..."
-    git clone https://github.com/passerby-b/JDDJ.git /data/cust_repo/JDDJ
-else
-    echo "更新JDDJ脚本相关文件..."
-    git -C /data/cust_repo/JDDJ reset --hard
-    git -C /data/cust_repo/JDDJ pull --rebase
-fi
+# if [ ! -d "/data/cust_repo/JDDJ/" ]; then
+#     echo "未检查到JDDJ仓库脚本，初始化下载相关脚本..."
+#     git clone https://github.com/passerby-b/JDDJ.git /data/cust_repo/JDDJ
+# else
+#     echo "更新JDDJ脚本相关文件..."
+#     git -C /data/cust_repo/JDDJ reset --hard
+#     git -C /data/cust_repo/JDDJ pull --rebase
+# fi
 rm -rf /scripts/jddj
 cp -rf /data/cust_repo/JDDJ /scripts/jddj
 cp -f /scripts/jdFruitShareCodes.js /scripts/jddj
