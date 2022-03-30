@@ -31,8 +31,8 @@ echo "附加功能2，创建其他任务"
 echo "更新中青和百度任务文件夹"
 rm -rf /scripts/somescripts
 cp -r /data/somescripts /scripts/somescripts
-echo "创建其他定时任务"
-echo "# 中青任务" >> $mergedListFile
+# echo "创建其他定时任务"
+# echo "# 中青任务" >> $mergedListFile
 # echo "*/30 5-23 * * * node /scripts/somescripts/youth/youth.js >> /data/logs/youth.log 2>&1" >> $mergedListFile
 # echo "15 5,10,15,19,22 * * * node /scripts/somescripts/youth/Youth_Read-ange.js >> /data/logs/Youth_Read-ange.log 2>&1" >> $mergedListFile
 # echo "38 9 * * * node /scripts/somescripts/youth/youth_gain-ange.js >> /data/logs/youth_gain-ange.log 2>&1" >> $mergedListFile
@@ -122,10 +122,10 @@ echo "11 0 * * * cd /data/cust_repo/curtinlv && python3 jd_qjd.py |ts >>/data/lo
 # echo "#城城分现金内部助力" >>$mergedListFile
 echo "0 0 9-21 * * cd /data/cust_repo/curtinlv && python3 jd_ccfxj_help.py |ts >>/data/logs/jd_ccfxj_help.log 2>&1 &" >>$mergedListFile
 
-echo "#curtinlv东东超市兑换" >>$mergedListFile
-sed -i "/coinToBeans =/s/''/'京豆包'/g" /data/cust_repo/curtinlv/jd_blueCoin.py
-sed -i "/blueCoin_Cc = /s/False/True/g" /data/cust_repo/curtinlv/jd_blueCoin.py
-echo "59 23 * * * cd /data/cust_repo/curtinlv && python3 jd_blueCoin.py |ts >>/data/logs/jd_blueCoinPy.log 2>&1 &" >>$mergedListFile
+# echo "#curtinlv东东超市兑换" >>$mergedListFile
+# sed -i "/coinToBeans =/s/''/'京豆包'/g" /data/cust_repo/curtinlv/jd_blueCoin.py
+# sed -i "/blueCoin_Cc = /s/False/True/g" /data/cust_repo/curtinlv/jd_blueCoin.py
+# echo "59 23 * * * cd /data/cust_repo/curtinlv && python3 jd_blueCoin.py |ts >>/data/logs/jd_blueCoinPy.log 2>&1 &" >>$mergedListFile
 
 # echo "#curtinlv的关注有礼任务 " >>$mergedListFile
 # cat /data/cookies.list >/data/cust_repo/curtinlv/getFollowGifts/JDCookies.txt
@@ -153,7 +153,7 @@ for jsname in $(ls /scripts/jddj | grep -E "jddj_.*.js$" | tr "\n" " "); do
     test -z "$jsnamecron" || echo "# $jsname_cn" >> $mergedListFile
     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /data/logs/$jsname_log.log 2>&1" >> $mergedListFile
 done
-echo "15 12 * * * node /scripts/jddj/jddj_fruit.js >> /data/logs/jddj_fruit.log 2>&1" >> $mergedListFile
+# echo "15 12 * * * node /scripts/jddj/jddj_fruit.js >> /data/logs/jddj_fruit.log 2>&1" >> $mergedListFile
 echo "5 13 * * * node /scripts/jddj/jd_fruit2.js >> /data/logs/jd_fruit2.log 2>&1" >> $mergedListFile
 echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js >> /data/logs/jd_dreamFactory2.log 2>&1" >> $mergedListFile
 echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js >> /data/logs/jd_cfd2.log 2>&1" >> $mergedListFile
