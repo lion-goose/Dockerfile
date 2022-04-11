@@ -6,7 +6,7 @@ green='\033[0;32m'
 plain='\033[0m'
 
 
-function pre_check() {
+pre_check() {
     [[ $EUID -ne 0 ]] && echo -e "${red}错误: ${plain} 需要root权限\n" && exit 1
 
     command -v git >/dev/null 2>&1
