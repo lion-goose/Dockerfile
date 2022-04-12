@@ -1,0 +1,40 @@
+zshrc
+export ALL_PROXY="http://192.168.200.1:7980"
+export all_proxy="http://192.168.200.1:7980"
+export ALL_PROXY="socks5://192.168.200.1:7980"
+export all_proxy="socks5://192.168.200.1:7980"
+
+
+/etc/apt/apt.conf
+Acquire::http::Proxy "http://192.168.200.1:7890";
+Acquire::socks::proxy "socks://http://192.168.200.1:7890";
+
+
+/etc/environment
+http_proxy=http://192.168.200.1:7890
+https_proxy=http://192.168.200.1:7890
+no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+HTTP_PROXY=http://192.168.200.1:7890
+HTTPS_PROXY=http://192.168.200.1:7890
+NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+/etc/profile
+export ALL_PROXY="http://192.168.200.1:7980"
+export all_proxy="http://192.168.200.1:7980"
+export ALL_PROXY="socks5://192.168.200.1:7980"
+export all_proxy="socks5://192.168.200.1:7980"
+
+git
+git config --global http.proxy http://192.168.200.1:7890
+
+KDE
+vi ~/.kde/share/config/kioslaverc
+追加(修改)如下内容：
+[Proxy Settings]
+AuthMode=0
+NoProxyFor=
+Proxy Config Script=
+ProxyType=1
+ReversedException=false
+httpProxy=http://代理服务器:(端口)
+httpsProxy=http://代理服务器:(端口)
