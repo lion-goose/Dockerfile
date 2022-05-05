@@ -174,7 +174,7 @@ fi
 # echo "59 7,15,23 * * * sleep 57s; node conc /scripts/jd_joy_reward_new.js >> /data/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
 # echo "0,48 0,8,16 * * * node conc /scripts/jd_joy_reward_new.js >> /data/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
 echo "#E5AutoApi调用任务 " >>$mergedListFile
-echo "25 */6 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
+echo "25 */3 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
 echo "#京东饭粒" >>$mergedListFile
 echo "24 1,15,23 * * * node /scripts/jd_fanli.js >> /data/logs/jd_fanli.log 2>&1" >>$mergedListFile
 echo "#美团限时红包" >>$mergedListFile
