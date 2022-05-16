@@ -177,8 +177,6 @@ echo "#E5AutoApi调用任务 " >>$mergedListFile
 echo "25 */3 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
 echo "#京东饭粒" >>$mergedListFile
 echo "24 1,15,23 * * * node /scripts/jd_fanli.js >> /data/logs/jd_fanli.log 2>&1" >>$mergedListFile
-echo "#美团限时红包" >>$mergedListFile
-echo "0 11,14,17,21,0,1,2,3 * * * cd /data/custom_scripts && python3 meituan.py |ts >>/data/logs/meituan.log 2>&1 &" >>$mergedListFile
 echo "#seresCheckin任务" >>$mergedListFile
 echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
 echo "#小米刷步数任务" >>$mergedListFile
