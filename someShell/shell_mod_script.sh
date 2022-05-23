@@ -143,8 +143,6 @@ echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关�
 # fi
 rm -rf /scripts/jddj
 cp -rf /data/cust_repo/JDDJ /scripts/jddj
-cp -f /scripts/jdFruitShareCodes.js /scripts/jddj
-cp -f /scripts/jdDreamFactoryShareCodes.js /scripts/jddj
 for jsname in $(ls /scripts/jddj | grep -E "jddj_.*.js$" | tr "\n" " "); do
     jsname_cn="$(grep "cron" /scripts/jddj/$jsname | grep -oE "/?/?tag\=.*" | cut -d"=" -f2)"
     jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
