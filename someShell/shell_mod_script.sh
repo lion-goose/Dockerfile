@@ -27,10 +27,6 @@ echo "56 23 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
 echo "#刷新cookie" >>$mergedListFile
 echo "0 */8 * * * ddBot -up renewCookie" >>$mergedListFile
 
-echo "附加功能2，创建其他任务"
-echo "更新中青和百度任务文件夹"
-rm -rf /scripts/somescripts
-cp -r /data/somescripts /scripts/somescripts
 # echo "创建其他定时任务"
 # echo "# 中青任务" >> $mergedListFile
 # echo "*/30 5-23 * * * node /scripts/somescripts/youth/youth.js >> /data/logs/youth.log 2>&1" >> $mergedListFile
@@ -132,7 +128,7 @@ echo "0 0 9-21 * * cd /data/cust_repo/curtinlv && python3 jd_ccfxj_help.py |ts >
 # echo "15 8,15 * * * cd /data/cust_repo/curtinlv/getFollowGifts && python3 jd_getFollowGift.py |ts >>/data/logs/jd_getFollowGift.log 2>&1 &" >>$mergedListFile
 
 
-echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关任务"
+# echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关任务"
 # if [ ! -d "/data/cust_repo/JDDJ/" ]; then
 #     echo "未检查到JDDJ仓库脚本，初始化下载相关脚本..."
 #     git clone https://github.com/passerby-b/JDDJ.git /data/cust_repo/JDDJ
@@ -141,20 +137,20 @@ echo "附加功能5，拉取@passerby-b的JDDJ仓库的代码，并增加相关�
 #     git -C /data/cust_repo/JDDJ reset --hard
 #     git -C /data/cust_repo/JDDJ pull --rebase
 # fi
-rm -rf /scripts/jddj
-cp -rf /data/cust_repo/JDDJ /scripts/jddj
-for jsname in $(ls /scripts/jddj | grep -E "jddj_.*.js$" | tr "\n" " "); do
-    jsname_cn="$(grep "cron" /scripts/jddj/$jsname | grep -oE "/?/?tag\=.*" | cut -d"=" -f2)"
-    jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
-    jsnamecron="$(cat /scripts/jddj/$jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
-    test -z "$jsname_cn" && jsname_cn=$jsname_log
-    test -z "$jsnamecron" || echo "# $jsname_cn" >> $mergedListFile
-    test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /data/logs/$jsname_log.log 2>&1" >> $mergedListFile
-done
-# echo "15 12 * * * node /scripts/jddj/jddj_fruit.js >> /data/logs/jddj_fruit.log 2>&1" >> $mergedListFile
-echo "5 13 * * * node /scripts/jddj/jd_fruit2.js >> /data/logs/jd_fruit2.log 2>&1" >> $mergedListFile
-echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js >> /data/logs/jd_dreamFactory2.log 2>&1" >> $mergedListFile
-echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js >> /data/logs/jd_cfd2.log 2>&1" >> $mergedListFile
+# rm -rf /scripts/jddj
+# cp -rf /data/cust_repo/JDDJ /scripts/jddj
+# for jsname in $(ls /scripts/jddj | grep -E "jddj_.*.js$" | tr "\n" " "); do
+#     jsname_cn="$(grep "cron" /scripts/jddj/$jsname | grep -oE "/?/?tag\=.*" | cut -d"=" -f2)"
+#     jsname_log="$(echo /scripts/jddj/$jsname | sed 's;^.*/\(.*\)\.js;\1;g')"
+#     jsnamecron="$(cat /scripts/jddj/$jsname | grep -oE "/?/?cron \".*\"" | cut -d\" -f2)"
+#     test -z "$jsname_cn" && jsname_cn=$jsname_log
+#     test -z "$jsnamecron" || echo "# $jsname_cn" >> $mergedListFile
+#     test -z "$jsnamecron" || echo "$jsnamecron node /scripts/jddj/$jsname >> /data/logs/$jsname_log.log 2>&1" >> $mergedListFile
+# done
+# # echo "15 12 * * * node /scripts/jddj/jddj_fruit.js >> /data/logs/jddj_fruit.log 2>&1" >> $mergedListFile
+# echo "5 13 * * * node /scripts/jddj/jd_fruit2.js >> /data/logs/jd_fruit2.log 2>&1" >> $mergedListFile
+# echo "10 12 * * * node /scripts/jddj/jd_dreamFactory2.js >> /data/logs/jd_dreamFactory2.log 2>&1" >> $mergedListFile
+# echo "5 8,19 * * * node /scripts/jddj/jd_cfd2.js >> /data/logs/jd_cfd2.log 2>&1" >> $mergedListFile
 
 echo "附加功能6，拉取@leeyiding的seresCheckin仓库的代码，并增加相关任务"
 if [ ! -d "/data/cust_repo/seresCheckin/" ]; then
@@ -171,11 +167,11 @@ fi
 # echo "47,58 7,15,16,23 * * * sleep 2s; node conc /scripts/jd_task_validate.js >> /data/logs/jd_task_validate.log 2>&1" >>$mergedListFile
 # echo "59 7,15,23 * * * sleep 57s; node conc /scripts/jd_joy_reward_new.js >> /data/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
 # echo "0,48 0,8,16 * * * node conc /scripts/jd_joy_reward_new.js >> /data/logs/jd_joy_reward_new.log 2>&1" >>$mergedListFile
-echo "#E5AutoApi调用任务 " >>$mergedListFile
-echo "25 */3 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
+# echo "#E5AutoApi调用任务 " >>$mergedListFile
+# echo "25 */3 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
 echo "#京东饭粒" >>$mergedListFile
 echo "24 1,15,23 * * * node /scripts/jd_fanli.js >> /data/logs/jd_fanli.log 2>&1" >>$mergedListFile
-echo "#seresCheckin任务" >>$mergedListFile
-echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
+# echo "#seresCheckin任务" >>$mergedListFile
+# echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
 echo "#小米刷步数任务" >>$mergedListFile
-echo "15 17 * * * cd /data/custom_scripts && python3 xmsport.py |ts >>/data/logs/meituan.log 2>&1 &" >>$mergedListFile
+echo "15 17 * * * cd /data/custom_scripts && python3 xmsport.py |ts >>/data/logs/xmsport.log 2>&1 &" >>$mergedListFile
