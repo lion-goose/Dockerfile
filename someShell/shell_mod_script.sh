@@ -171,7 +171,7 @@ fi
 # echo "25 */3 * * * cd /data/somescripts/AutoApiSecret && sh start.sh" >>$mergedListFile
 echo "#京东饭粒" >>$mergedListFile
 echo "24 1,15,23 * * * node /scripts/jd_fanli.js >> /data/logs/jd_fanli.log 2>&1" >>$mergedListFile
-# echo "#seresCheckin任务" >>$mergedListFile
-# echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
+echo "#seresCheckin任务" >>$mergedListFile
+echo "48 7,15 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
 echo "#小米刷步数任务" >>$mergedListFile
 echo "15 17 * * * cd /data/custom_scripts && python3 xmsport.py |ts >>/data/logs/xmsport.log 2>&1 &" >>$mergedListFile
