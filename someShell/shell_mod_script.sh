@@ -172,6 +172,6 @@ fi
 echo "#京东饭粒" >>$mergedListFile
 echo "24 1,15,23 * * * node /scripts/jd_fanli.js >> /data/logs/jd_fanli.log 2>&1" >>$mergedListFile
 echo "#seresCheckin任务" >>$mergedListFile
-echo "48 6,13,19,23 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
+echo "18 6,13,19,23 * * * cd /data/cust_repo/seresCheckin && python3 main.py" >>$mergedListFile
 echo "#小米刷步数任务" >>$mergedListFile
 echo "15 17 * * * cd /data/somescripts && python3 xmsport.py |ts >>/data/logs/xmsport.log 2>&1 &" >>$mergedListFile
