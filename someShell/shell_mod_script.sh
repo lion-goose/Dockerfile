@@ -25,7 +25,7 @@ echo "55 1 * * * sh /data/forwardBot/start.sh restart" >>$mergedListFile
 echo "56 1 * * * sh /data/liby_forward/liby_start.sh restart" >>$mergedListFile
 #echo "57 23 * * * sh /data/sun_forward/sun_start.sh restart" >>$mergedListFile
 echo "#刷新cookie" >>$mergedListFile
-echo "0 */8 * * * ddBot -up renewCookie" >>$mergedListFile
+echo "0 */4 * * * ddBot -up renewCookie" >>$mergedListFile
 
 # echo "创建其他定时任务"
 # echo "# 中青任务" >> $mergedListFile
