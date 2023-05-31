@@ -27,6 +27,10 @@ function pre_check() {
     if [[ $? != 0 ]]; then
         echo -e "正在安装Docker..."
         bash <(curl -fsL https://get.docker.com) >/dev/null 2>&1
+        systemctl enable docker.service
+        systemctl enable containerd.service
+        groupadd docker
+        usermod -aG docker $USER
         echo -e "${green}Docker${plain} 安装成功"
     fi
 
