@@ -32,6 +32,9 @@ function pre_check() {
         groupadd docker
         usermod -aG docker $USER
         echo -e "${green}Docker${plain} 安装成功"
+        curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+        docker-compose version
     fi
 
     command -v tar >/dev/null 2>&1
